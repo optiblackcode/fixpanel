@@ -18,9 +18,11 @@ import {
   WalletIcon,
 } from "lucide-react";
 
-import fooImage from "/public/foo.png";
-import barImage from "/public/bar.png";
-import bazImage from "/public/baz.png";
+import fooImage from "./images/foo.png";
+import barImage from "./images/bar.png";
+import bazImage from "./images/baz.png";
+import heroImage from "./images/hero.png";
+import themImage from "./images/them.png";
 
 export default function HomePage() {
   const [fortune, setFortune] = useState("");
@@ -62,8 +64,6 @@ export default function HomePage() {
       mixpanel.track(label);
     }
   };
-
-  
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -265,11 +265,13 @@ export default function HomePage() {
                   Crack open a virtual fortune cookie and glimpse your prosperous future!
                 </p>
               </div>
-              <img src="/hero.png" alt="busy working" height="100" className="rounded-none" />
+              <img src={heroImage.src} alt="busy working" height="100" className="rounded-none" />
               <div className="w-full max-w-sm space-y-2">
                 <Button
-                  onClick={track}
-                  onClick={getFinancialFortune}
+                  onClick={(e) => {
+                    getFinancialFortune();
+                    track(e);
+                  }}
                   className="w-full bg-white text-[#CC332B] hover:bg-gray-100"
                 >
                   <CookieIcon className="mr-2 h-4 w-4" />
@@ -293,7 +295,12 @@ export default function HomePage() {
                   Ready to Join the Financial Elite?
                 </h2>
                 <div className="flex justify-center mt-8 relative w-full" style={{ height: "400px" }}>
-                  <img src="/them.png" alt="interesting things" style={{ height: "100%" }} className="rounded-none" />
+                  <img
+                    src={themImage.src}
+                    alt="interesting things"
+                    style={{ height: "100%" }}
+                    className="rounded-none"
+                  />
                 </div>
                 <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Don't let your money sit there like a couch potato. It's time to make it work harder than a

@@ -10,11 +10,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const basePath = process.env.NODE_ENV === "production" ? "/fixpanel" : "";
+
   return (
     <html lang="en">
-      <head>		
-        <script src="/mixpanel.js" defer type="text/javascript"></script>
-		<script src="/analytics.js" defer></script>
+      <head>
+        <script src={`${basePath}/mixpanel.js`} defer />
+        <script src={`${basePath}/analytics.js`} defer />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
