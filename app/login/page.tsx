@@ -1,24 +1,29 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { CreditCardIcon } from 'lucide-react'
-import { Header } from '@/components/Header'
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import { btnTrack, pageTrack } from "../../components/Track";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { CreditCardIcon } from "lucide-react";
+import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-	<Header />
+<Header />;
 
 export default function Component() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  useEffect(() => {
+    pageTrack("login");
+  }, []);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Here you would typically send the login credentials to your backend
-    console.log('Login form submitted', { email, password })
-  }
+    console.log("Login form submitted", { email, password });
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -37,10 +42,10 @@ export default function Component() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
-              <Input 
-                id="email" 
-                placeholder="m@example.com" 
-                required 
+              <Input
+                id="email"
+                placeholder="m@example.com"
+                required
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -48,15 +53,15 @@ export default function Component() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
-              <Input 
-                id="password" 
-                required 
+              <Input
+                id="password"
+                required
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <Button className="w-full" type="submit">
+            <Button onClick={btnTrack} className="w-full" type="submit">
               Log In
             </Button>
           </form>
@@ -68,7 +73,7 @@ export default function Component() {
           </div>
         </div>
       </main>
-	  <Footer />
+      <Footer />
     </div>
-  )
+  );
 }

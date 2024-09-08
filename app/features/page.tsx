@@ -1,13 +1,20 @@
-import Link from 'next/link'
-import { Button } from "@/components/ui/button"
-import { CreditCardIcon, PieChartIcon, BellIcon, LockIcon, TrendingUpIcon, HeadphonesIcon } from 'lucide-react'
-import { Header } from '@/components/Header'
+"use client";
+
+import { useEffect } from "react";
+import { btnTrack, pageTrack } from "../../components/Track"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { CreditCardIcon, PieChartIcon, BellIcon, LockIcon, TrendingUpIcon, HeadphonesIcon } from "lucide-react";
+import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export default function FeaturesPage() {
+  useEffect(() => {
+    pageTrack("features");
+  }, []);
   return (
     <div className="flex flex-col min-h-screen">
-	<Header />
+      <Header />
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
@@ -65,13 +72,13 @@ export default function FeaturesPage() {
             </div>
             <div className="flex justify-center">
               <Link href="/signup">
-                <Button size="lg">Start Your Free Trial</Button>
+                <Button size="lg" onClick={btnTrack}>Start Your Free Trial</Button>
               </Link>
             </div>
           </div>
         </section>
       </main>
-	  <Footer />
+      <Footer />
     </div>
-  )
+  );
 }

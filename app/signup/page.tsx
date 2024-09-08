@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { btnTrack, pageTrack } from "../../components/Track"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,6 +24,10 @@ export default function SignUpPage() {
     confirmPassword: "",
   });
 
+  useEffect(() => {
+    pageTrack("signup");
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
@@ -37,9 +42,9 @@ export default function SignUpPage() {
       case 1:
         return formData.financialGoal !== "" && formData.incomeRange !== "";
       case 2:
-		// THIS IS THE BUG... LOL
-        return false;
-      	return formData.investmentExperience !== ''
+        // THIS IS THE BUG... LOL
+        // return false;
+        return formData.investmentExperience !== "";
       case 3:
         return formData.email !== "" && formData.password !== "" && formData.confirmPassword !== "";
       default:
@@ -51,7 +56,6 @@ export default function SignUpPage() {
     if (isStepValid()) {
       setStep((prevStep) => prevStep + 1);
     }
-    tracking(step);
   };
 
   const handlePrevious = () => {
@@ -63,17 +67,9 @@ export default function SignUpPage() {
     // Here you would typically send the form data to your backend
     console.log("Sign up form submitted", formData);
     if (mixpanel) {
-      if (mixpanel.ez) {
-        mixpanel.ez.track("sign up", { email: formData.email });
-      }
-    }
-  };
-
-  const tracking = (stepNo: number) => {
-    if (mixpanel) {
-      if (mixpanel.ez) {
-        mixpanel.ez.track("next", { step: stepNo });
-      }
+      const formTrackingProps = Object.assign({}, formData);
+      delete formTrackingProps?.password;
+      mixpanel.track("sign up submit", formTrackingProps);
     }
   };
 
@@ -214,16 +210,32 @@ export default function SignUpPage() {
               )}
               <div className="flex justify-between pt-20">
                 {step > 1 && (
-                  <Button type="button" onClick={handlePrevious} variant="outline" className="sensitive">
+                  <Button
+                    type="button"
+                    onClick={(e) => {
+                      handlePrevious();
+                      btnTrack(e);
+                    }}
+                    variant="outline"
+                    className="sensitive"
+                  >
                     <ArrowLeftIcon className="mr-2 h-4 w-4" /> Previous
                   </Button>
                 )}
                 {step < 3 ? (
-                  <Button type="button" onClick={handleNext} disabled={!isStepValid()} className="ml-auto sensitive">
+                  <Button
+                    type="button"
+                    onClick={(e) => {
+                      handleNext();
+                      btnTrack(e);
+                    }}
+                    disabled={!isStepValid()}
+                    className="ml-auto sensitive"
+                  >
                     Next <ArrowRightIcon className="ml-2 h-4 w-4" />
                   </Button>
                 ) : (
-                  <Button type="submit" disabled={!isStepValid()} className="ml-auto sensitive">
+                  <Button type="submit" disabled={!isStepValid()} onClick={btnTrack} className="ml-auto sensitive">
                     Sign Up
                   </Button>
                 )}

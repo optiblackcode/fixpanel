@@ -1,3 +1,7 @@
+"use client"
+
+import { useEffect } from "react";
+import { btnTrack, pageTrack } from "../../components/Track"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CreditCardIcon, Users2Icon, TrendingUpIcon, ShieldCheckIcon } from "lucide-react";
@@ -5,6 +9,10 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export default function AboutPage() {
+  useEffect(() => {
+    pageTrack("about");
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -61,13 +69,13 @@ export default function AboutPage() {
             </div>
             <div className="flex justify-center">
               <Link href="/signup">
-                <Button size="lg">Join FixPanel Today</Button>
+                <Button size="lg" onClick={btnTrack}>Join FixPanel Today</Button>
               </Link>
             </div>
           </div>
         </section>
       </main>
-	  <Footer />
+      <Footer />
     </div>
   );
 }

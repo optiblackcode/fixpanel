@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { btnTrack, pageTrack } from "../components/Track";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -37,6 +38,10 @@ export default function HomePage() {
   ];
 
   useEffect(() => {
+    pageTrack("home");
+  }, []);
+
+  useEffect(() => {
     const taglines = [
       "Fix Your Finances with Data-Driven Insights.",
       "Track Every Dollar, Analyze Every Decision",
@@ -57,14 +62,6 @@ export default function HomePage() {
     setFortune(randomFortune);
   };
 
-  const track = (a: React.MouseEvent) => {
-    if (mixpanel) {
-      const target = a.target as HTMLButtonElement;
-      const label = target.textContent?.toLowerCase() || "click";
-      mixpanel.track(label);
-    }
-  };
-
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -83,7 +80,7 @@ export default function HomePage() {
                   <Button
                     size="lg"
                     className="bg-white text-[#7856FF]  hover:bg-white/20 hover:text-black"
-                    onClick={track}
+                    onClick={btnTrack}
                   >
                     <GemIcon className="pr-2" />
                     Get Started
@@ -94,7 +91,7 @@ export default function HomePage() {
                     size="lg"
                     variant="outline"
                     className="bg-white text-[#1c782d] hover:bg-white/20"
-                    onClick={track}
+                    onClick={btnTrack}
                   >
                     <WalletIcon className="pr-2" />
                     Member Login
@@ -125,7 +122,7 @@ export default function HomePage() {
                   Our patented technology turns cents into dollars. It's like magic, but with more spreadsheets.
                 </p>
                 <Link href="/products">
-                  <Button onClick={track} variant="outline" className="mt-4">
+                  <Button onClick={btnTrack} variant="outline" className="mt-4">
                     Explore Products
                   </Button>
                 </Link>
@@ -137,7 +134,7 @@ export default function HomePage() {
                   We guard your money like it's ours. You'll always be able to see it... and we're not giving it back!
                 </p>
                 <Link href="/features">
-                  <Button onClick={track} variant="outline" className="mt-4">
+                  <Button onClick={btnTrack} variant="outline" className="mt-4">
                     Learn More
                   </Button>
                 </Link>
@@ -149,7 +146,7 @@ export default function HomePage() {
                   Swipe right to make purchases, swipe left to make debt disappear! It's that easy... or is it?
                 </p>
                 <Link href="/signup">
-                  <Button onClick={track} variant="outline" className="mt-4">
+                  <Button onClick={btnTrack} variant="outline" className="mt-4">
                     Find Out
                   </Button>
                 </Link>
@@ -178,7 +175,7 @@ export default function HomePage() {
                   to support him, but honestly I'm not sure."
                 </p>
                 <Link href="/signup">
-                  <Button onClick={track} className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
+                  <Button onClick={btnTrack} className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
                     Join Sue
                   </Button>
                 </Link>
@@ -191,7 +188,7 @@ export default function HomePage() {
                   invested sooner.)"
                 </p>
                 <Link href="/products">
-                  <Button onClick={track} className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
+                  <Button onClick={btnTrack} className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
                     Get Purrfect Returns
                   </Button>
                 </Link>
@@ -204,7 +201,7 @@ export default function HomePage() {
                   good choices,"
                 </p>
                 <Link href="/signup">
-                  <Button onClick={track} className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
+                  <Button onClick={btnTrack} className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
                     Secure Your Island
                   </Button>
                 </Link>
@@ -248,7 +245,7 @@ export default function HomePage() {
 
             <div className="flex justify-center mt-8">
               <Link href="/about">
-                <Button onClick={track} size="lg" className="bg-white text-[#DA6B16] hover:bg-gray-100">
+                <Button onClick={btnTrack} size="lg" className="bg-white text-[#DA6B16] hover:bg-gray-100">
                   Discover Our Greatness
                 </Button>
               </Link>
@@ -270,7 +267,7 @@ export default function HomePage() {
                 <Button
                   onClick={(e) => {
                     getFinancialFortune();
-                    track(e);
+                    btnTrack(e);
                   }}
                   className="w-full bg-white text-[#CC332B] hover:bg-gray-100"
                 >
@@ -310,7 +307,7 @@ export default function HomePage() {
               <div className="w-full max-w-sm space-y-2 p-5">
                 <form className="flex space-x-2">
                   <Input className="max-w-lg flex-1" placeholder="" type="email" />
-                  <Button onClick={track} type="submit" className="bg-[#7856FF] text-white hover:bg-[#7856FF]/90">
+                  <Button onClick={btnTrack} type="submit" className="bg-[#7856FF] text-white hover:bg-[#7856FF]/90">
                     Subscribe
                   </Button>
                 </form>
@@ -323,13 +320,13 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
                 <Link href="/signup">
-                  <Button onClick={track} size="lg" className="bg-[#07B096] text-white hover:bg-[#07B096]/90">
+                  <Button onClick={btnTrack} size="lg" className="bg-[#07B096] text-white hover:bg-[#07B096]/90">
                     Start Your Journey
                   </Button>
                 </Link>
                 <Link href="/products">
                   <Button
-                    onClick={track}
+                    onClick={btnTrack}
                     size="lg"
                     variant="outline"
                     className="border-[#07B096] text-[#07B096] hover:bg-[#07B096]/10"

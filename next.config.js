@@ -7,6 +7,7 @@ const nextConfig = {
 	  unoptimized: true, // Optional: Disable image optimization for static export
 	},
 	assetPrefix: process.env.NODE_ENV === 'production' ? '/fixpanel' : '',
+	reactStrictMode: false
 
 };
 

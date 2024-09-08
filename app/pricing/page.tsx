@@ -1,13 +1,21 @@
-import Link from 'next/link'
-import { Button } from "@/components/ui/button"
-import { CreditCardIcon, CheckIcon } from 'lucide-react'
-import { Header } from '@/components/Header'
+"use client";
+import { useEffect } from "react";
+import { btnTrack, pageTrack } from "../../components/Track"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { CreditCardIcon, CheckIcon } from "lucide-react";
+import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export default function PricingPage() {
+  useEffect(() => {
+    pageTrack("pricing");
+  }, []);
+
+
   return (
     <div className="flex flex-col min-h-screen">
-	<Header />
+      <Header />
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
@@ -41,7 +49,7 @@ export default function PricingPage() {
                     </li>
                   </ul>
                 </div>
-                <Button className="mt-6">Get Started</Button>
+                <Button onClick={btnTrack} className="mt-6">Get Started</Button>
               </div>
               <div className="flex flex-col justify-between p-6 bg-white shadow-lg rounded-lg dark:bg-gray-800 border-2 border-primary">
                 <div>
@@ -68,7 +76,7 @@ export default function PricingPage() {
                     </li>
                   </ul>
                 </div>
-                <Button className="mt-6">Start Free Trial</Button>
+                <Button onClick={btnTrack} className="mt-6">Start Free Trial</Button>
               </div>
               <div className="flex flex-col justify-between p-6 bg-white shadow-lg rounded-lg dark:bg-gray-800">
                 <div>
@@ -95,13 +103,13 @@ export default function PricingPage() {
                     </li>
                   </ul>
                 </div>
-                <Button className="mt-6">Contact Sales</Button>
+                <Button onClick={btnTrack} className="mt-6">Contact Sales</Button>
               </div>
             </div>
           </div>
         </section>
       </main>
-	  <Footer />
+      <Footer />
     </div>
-  )
+  );
 }

@@ -16,7 +16,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <script src={`${basePath}/mixpanel.js`} defer />
-        <script src={`${basePath}/analytics.js`} defer />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
