@@ -10,10 +10,10 @@ const PARAMS = qsToObj(window.location.search);
 console.log('\nmixpanel.js params\n', PARAMS, '\n\n');
 let {
 	user = "",
-	token = "5296ee88cd9a6bdc89a84bd7678d39c9",
-	project_id = "3402216",
-	workspace_id = "3907080",
-	mask = "dealWithIt",
+	token = "4e3d694b0ec5375b51634a93e22af8f6",
+	project_id = "3403117",
+	workspace_id = "3907905",
+	mask = "sensitive",
 	percent = 100,
 	...restParams
 } = PARAMS;

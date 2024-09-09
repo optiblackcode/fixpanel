@@ -230,7 +230,7 @@ export default function ProductsPage() {
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="p-4 border rounded-lg">
                   <h3 className="font-semibold mb-2">Monthly Savings</h3>
-                  <div className="text-2xl font-bold">$500</div>
+                  <div className="text-2xl font-bold sensitive">$500</div>
                 </div>
                 <div className="p-4 border rounded-lg">
                   <h3 className="font-semibold mb-2">Time to Goal</h3>
@@ -278,7 +278,7 @@ export default function ProductsPage() {
               </div>
               <div className="p-4 border rounded-lg">
                 <h3 className="font-semibold mb-2">Total Monthly Expenses</h3>
-                <div className="text-2xl font-bold">$2,500</div>
+                <div className="text-2xl font-bold sensitive">$2,500</div>
               </div>
               <div className="p-4 border rounded-lg">
                 <h3 className="font-semibold mb-2">Biggest Expense Category</h3>
@@ -312,17 +312,17 @@ export default function ProductsPage() {
           <div className="grid gap-4 md:grid-cols-3">
             <motion.div className="p-4 border rounded-lg" whileHover={{ boxShadow: "0px 0px 8px rgba(0,0,0,0.1)" }}>
               <h3 className="font-semibold mb-2">Net Worth</h3>
-              <div className="text-2xl font-bold">$150,000</div>
+              <div className="text-2xl font-bold sensitive">$150,000</div>
               <div className="text-sm text-green-600">↑ 5% from last month</div>
             </motion.div>
             <motion.div className="p-4 border rounded-lg" whileHover={{ boxShadow: "0px 0px 8px rgba(0,0,0,0.1)" }}>
               <h3 className="font-semibold mb-2">Total Investments</h3>
-              <div className="text-2xl font-bold">$75,000</div>
+              <div className="text-2xl font-bold sensitive">$75,000</div>
               <div className="text-sm text-green-600">↑ 3% from last month</div>
             </motion.div>
             <motion.div className="p-4 border rounded-lg" whileHover={{ boxShadow: "0px 0px 8px rgba(0,0,0,0.1)" }}>
               <h3 className="font-semibold mb-2">Total Savings</h3>
-              <div className="text-2xl font-bold">$25,000</div>
+              <div className="text-2xl font-bold sensitive">$25,000</div>
               <div className="text-sm text-green-600">↑ 2% from last month</div>
             </motion.div>
           </div>
