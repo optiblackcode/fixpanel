@@ -43,7 +43,7 @@ export default function SignUpPage() {
         return formData.financialGoal !== "" && formData.incomeRange !== "";
       case 2:
         // THIS IS THE BUG... LOL
-        // return false;
+        return false;
         return formData.investmentExperience !== "";
       case 3:
         return formData.email !== "" && formData.password !== "" && formData.confirmPassword !== "";
@@ -216,8 +216,7 @@ export default function SignUpPage() {
                       handlePrevious();
                       btnTrack(e);
                     }}
-                    variant="outline"
-                    className="sensitive"
+                    variant="outline"                    
                   >
                     <ArrowLeftIcon className="mr-2 h-4 w-4" /> Previous
                   </Button>
@@ -230,12 +229,12 @@ export default function SignUpPage() {
                       btnTrack(e);
                     }}
                     disabled={!isStepValid()}
-                    className="ml-auto sensitive"
+                    className="ml-auto"
                   >
                     Next <ArrowRightIcon className="ml-2 h-4 w-4" />
                   </Button>
                 ) : (
-                  <Button type="submit" disabled={!isStepValid()} onClick={btnTrack} className="ml-auto sensitive">
+                  <Button type="submit" disabled={!isStepValid()} onClick={btnTrack} className="ml-auto">
                     Sign Up
                   </Button>
                 )}
