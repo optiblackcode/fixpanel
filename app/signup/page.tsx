@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { btnTrack, pageTrack } from "../../components/Track"
+// import { btnTrack, pageTrack } from "../../components/Track"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -25,7 +25,7 @@ export default function SignUpPage() {
   });
 
   useEffect(() => {
-    pageTrack("signup");
+    // pageTrack("signup");
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ export default function SignUpPage() {
         return formData.financialGoal !== "" && formData.incomeRange !== "";
       case 2:
         // THIS IS THE BUG... LOL
-        return false;
+        // return false;
         return formData.investmentExperience !== "";
       case 3:
         return formData.email !== "" && formData.password !== "" && formData.confirmPassword !== "";
@@ -68,7 +68,7 @@ export default function SignUpPage() {
     console.log("Sign up form submitted", formData);
     if (mixpanel) {
       const formTrackingProps = Object.assign({}, formData);
-      delete formTrackingProps?.password;
+      formTrackingProps?.password === "*********";
       mixpanel.track("sign up submit", formTrackingProps);
     }
   };
@@ -212,9 +212,10 @@ export default function SignUpPage() {
                 {step > 1 && (
                   <Button
                     type="button"
+					id="previous"
                     onClick={(e) => {
                       handlePrevious();
-                      btnTrack(e);
+                    //   btnTrack(e);
                     }}
                     variant="outline"                    
                   >
@@ -224,9 +225,10 @@ export default function SignUpPage() {
                 {step < 3 ? (
                   <Button
                     type="button"
+					id="next"
                     onClick={(e) => {
                       handleNext();
-                      btnTrack(e);
+                    //   btnTrack(e);
                     }}
                     disabled={!isStepValid()}
                     className="ml-auto"
@@ -234,7 +236,7 @@ export default function SignUpPage() {
                     Next <ArrowRightIcon className="ml-2 h-4 w-4" />
                   </Button>
                 ) : (
-                  <Button type="submit" disabled={!isStepValid()} onClick={btnTrack} className="ml-auto">
+                  <Button type="submit" disabled={!isStepValid()} id="signUp" className="ml-auto">
                     Sign Up
                   </Button>
                 )}

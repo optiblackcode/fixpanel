@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-import { btnTrack, pageTrack } from "../../components/Track"
+// import { btnTrack, pageTrack } from "../../components/Track"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CreditCardIcon, CheckIcon } from "lucide-react";
@@ -9,7 +9,7 @@ import { Footer } from "@/components/Footer";
 
 export default function PricingPage() {
   useEffect(() => {
-    pageTrack("pricing");
+    // pageTrack("pricing");
   }, []);
 
 
@@ -49,7 +49,7 @@ export default function PricingPage() {
                     </li>
                   </ul>
                 </div>
-                <Button onClick={btnTrack} className="mt-6">Get Started</Button>
+                <Button id="getStarted" className="mt-6">Get Started</Button>
               </div>
               <div className="flex flex-col justify-between p-6 bg-white shadow-lg rounded-lg dark:bg-gray-800 border-2 border-primary">
                 <div>
@@ -76,7 +76,7 @@ export default function PricingPage() {
                     </li>
                   </ul>
                 </div>
-                <Button onClick={btnTrack} className="mt-6">Start Free Trial</Button>
+                <Button id="trial" className="mt-6">Start Free Trial</Button>
               </div>
               <div className="flex flex-col justify-between p-6 bg-white shadow-lg rounded-lg dark:bg-gray-800">
                 <div>
@@ -103,7 +103,7 @@ export default function PricingPage() {
                     </li>
                   </ul>
                 </div>
-                <Button onClick={btnTrack} className="mt-6">Contact Sales</Button>
+                <Button id="contactSales" className="mt-6">Contact Sales</Button>
               </div>
             </div>
           </div>

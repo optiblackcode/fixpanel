@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { btnTrack, pageTrack } from "../../components/Track"
+// import { btnTrack, pageTrack } from "../../components/Track"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,7 +34,7 @@ import {
 
 export default function ProductsPage() {
   useEffect(() => {
-    pageTrack("products");
+    // pageTrack("products");
   }, []);
 
   const [investmentAmount, setInvestmentAmount] = useState(5000);
@@ -145,9 +145,10 @@ export default function ProductsPage() {
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="font-semibold">Portfolio Allocation</h3>
                   <Button
+                    id="rebalance"
                     onClick={(e) => {
                       rebalancePortfolio();
-                      btnTrack(e);
+                      //   btnTrack(e);
                     }}
                     size="sm"
                   >
@@ -179,9 +180,10 @@ export default function ProductsPage() {
               <div className="grid gap-4 md:grid-cols-2">
                 <Button
                   className={`w-full ${activeInvestmentAction === "increase" ? "bg-green-500 hover:bg-green-600" : ""}`}
+                  id="increaseInvestment"
                   onClick={(e) => {
                     toggleInvestmentAction("increase");
-                    btnTrack(e);
+                    // btnTrack(e);
                   }}
                 >
                   <TrendingUpIcon className="mr-2 h-4 w-4" />
@@ -189,12 +191,13 @@ export default function ProductsPage() {
                 </Button>
                 <Button
                   variant="outline"
+				  id="decreaseInvestment"
                   className={`w-full ${
                     activeInvestmentAction === "decrease" ? "bg-red-500 hover:bg-red-600 text-white" : ""
                   }`}
                   onClick={(e) => {
                     toggleInvestmentAction("decrease");
-                    btnTrack(e);
+                    // btnTrack(e);
                   }}
                 >
                   <TrendingDownIcon className="mr-2 h-4 w-4" />
@@ -240,9 +243,10 @@ export default function ProductsPage() {
               <div className="grid gap-4 md:grid-cols-2">
                 <Button
                   className={`w-full ${activeSavingsAction === "increase" ? "bg-green-500 hover:bg-green-600" : ""}`}
+				  id="increaseSavings"
                   onClick={(e) => {
                     toggleSavingsAction("increase");
-                    btnTrack(e);
+                    // btnTrack(e);
                   }}
                 >
                   <TrendingUpIcon className="mr-2 h-4 w-4" />
@@ -250,6 +254,7 @@ export default function ProductsPage() {
                 </Button>
                 <Button
                   variant="outline"
+				  id="adjustGoal"
                   className={`w-full ${
                     activeSavingsAction === "adjust" ? "bg-blue-500 hover:bg-blue-600 text-white" : ""
                   }`}
@@ -286,10 +291,11 @@ export default function ProductsPage() {
               </div>
               <div className="grid gap-4 md:grid-cols-2">
                 <Button
+				id="reduceExpenses"
                   className={`w-full ${activeExpenseAction === "reduce" ? "bg-green-500 hover:bg-green-600" : ""}`}
                   onClick={(e) => {
                     toggleExpenseAction("reduce");
-                    btnTrack(e);
+                    // btnTrack(e);
                   }}
                 >
                   <TrendingDownIcon className="mr-2 h-4 w-4" />
@@ -330,7 +336,9 @@ export default function ProductsPage() {
           <div className="text-center">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button size="lg" onClick={btnTrack}>Generate Financial Report</Button>
+                <Button size="lg" id="generateReport">
+                  Generate Financial Report
+                </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuLabel>Choose Report Type</DropdownMenuLabel>

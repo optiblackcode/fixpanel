@@ -10,7 +10,7 @@ const PARAMS = qsToObj(window.location.search);
 console.log('\nmixpanel.js params\n', PARAMS, '\n\n');
 let {
 	user = "",
-	token = "204809263e148f5a7cc63e171865a4b2",
+	token = "5d6ca81b005ddbc2dbf8eeca0a058869",
 	project_id = "3403883",
 	workspace_id = "3908647",
 	mask = ".sensitive",
@@ -90,7 +90,7 @@ if (mixpanel && mixpanel.init) {
  * MIXPANEL INIT
  */
 
-mixpanel.init('5296ee88cd9a6bdc89a84bd7678d39c9');
+mixpanel.init('5d6ca81b005ddbc2dbf8eeca0a058869');
 
 
 

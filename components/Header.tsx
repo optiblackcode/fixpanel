@@ -1,12 +1,13 @@
 
-import { linkTrack } from "./Track";
+// import { linkTrack } from "./Track";
 import Link from "next/link";
 import { CreditCardIcon, TrendingUpDownIcon } from "lucide-react";
+
 
 export function Header() {
   return (
     <header className="px-4 lg:px-6 h-14 flex items-center opacity-75 hover:opacity-100">
-      <Link className="flex items-center justify-center" href="/" onClick={linkTrack}>
+      <Link className="flex items-center justify-center" href="https://mixpanel.com/project/3276012/view/3782804/app/events" target="_blank">
         <TrendingUpDownIcon className="h-10 w-10" />
         <span className="ml-2 text-lg font-semibold">FixPanel <span className="invisible">logo</span></span>
       </Link>
@@ -29,6 +30,7 @@ export function Header() {
         <Link className="text-sm font-medium hover:underline underline-offset-4" href="/about">
           About
         </Link>
+		
       </nav>
     </header>
   );

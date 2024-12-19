@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { btnTrack, pageTrack } from "../components/Track";
+// import { btnTrack, pageTrack } from "../components/Track";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,7 +38,7 @@ export default function HomePage() {
   ];
 
   useEffect(() => {
-    pageTrack("home");
+    // pageTrack("home");
   }, []);
 
   useEffect(() => {
@@ -80,7 +80,8 @@ export default function HomePage() {
                   <Button
                     size="lg"
                     className="bg-white text-[#7856FF]  hover:bg-white/20 hover:text-black"
-                    onClick={btnTrack}
+                    // onClick={btnTrack}
+                    id="getStarted"
                   >
                     <GemIcon className="pr-2" />
                     Get Started
@@ -91,7 +92,8 @@ export default function HomePage() {
                     size="lg"
                     variant="outline"
                     className="bg-white text-[#1c782d] hover:bg-white/20"
-                    onClick={btnTrack}
+                    // onClick={btnTrack}
+                    id="memberLogin"
                   >
                     <WalletIcon className="pr-2" />
                     Member Login
@@ -122,7 +124,7 @@ export default function HomePage() {
                   Our patented technology turns cents into dollars. It's like magic, but with more spreadsheets.
                 </p>
                 <Link href="/products">
-                  <Button onClick={btnTrack} variant="outline" className="mt-4">
+                  <Button id="explore" variant="outline" className="mt-4">
                     Explore Products
                   </Button>
                 </Link>
@@ -134,7 +136,7 @@ export default function HomePage() {
                   We guard your money like it's ours. You'll always be able to see it... and we're not giving it back!
                 </p>
                 <Link href="/features">
-                  <Button onClick={btnTrack} variant="outline" className="mt-4">
+                  <Button id="learnMore" variant="outline" className="mt-4">
                     Learn More
                   </Button>
                 </Link>
@@ -146,7 +148,7 @@ export default function HomePage() {
                   Swipe right to make purchases, swipe left to make debt disappear! It's that easy... or is it?
                 </p>
                 <Link href="/signup">
-                  <Button onClick={btnTrack} variant="outline" className="mt-4">
+                  <Button id="findOut" variant="outline" className="mt-4">
                     Find Out
                   </Button>
                 </Link>
@@ -175,7 +177,7 @@ export default function HomePage() {
                   to support him, but honestly I'm not sure."
                 </p>
                 <Link href="/signup">
-                  <Button onClick={btnTrack} className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
+                  <Button id="joinSue" className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
                     Join Sue
                   </Button>
                 </Link>
@@ -188,7 +190,7 @@ export default function HomePage() {
                   invested sooner.)"
                 </p>
                 <Link href="/products">
-                  <Button onClick={btnTrack} className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
+                  <Button id="purrfectReturns" className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
                     Get Purrfect Returns
                   </Button>
                 </Link>
@@ -201,7 +203,7 @@ export default function HomePage() {
                   good choices,"
                 </p>
                 <Link href="/signup">
-                  <Button onClick={btnTrack} className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
+                  <Button id="secureIsland" className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
                     Secure Your Island
                   </Button>
                 </Link>
@@ -245,7 +247,7 @@ export default function HomePage() {
 
             <div className="flex justify-center mt-8">
               <Link href="/about">
-                <Button onClick={btnTrack} size="lg" className="bg-white text-[#DA6B16] hover:bg-gray-100">
+                <Button id="greatness" size="lg" className="bg-white text-[#DA6B16] hover:bg-gray-100">
                   Discover Our Greatness
                 </Button>
               </Link>
@@ -265,9 +267,10 @@ export default function HomePage() {
               <img src={heroImage.src} alt="busy working" height="100" className="rounded-none" />
               <div className="w-full max-w-sm space-y-2">
                 <Button
+                  id="financialFortune"
                   onClick={(e) => {
                     getFinancialFortune();
-                    btnTrack(e);
+                    // btnTrack(e);
                   }}
                   className="w-full bg-white text-[#CC332B] hover:bg-gray-100"
                 >
@@ -307,7 +310,7 @@ export default function HomePage() {
               <div className="w-full max-w-sm space-y-2 p-5">
                 <form className="flex space-x-2">
                   <Input className="max-w-lg flex-1" placeholder="" type="email" />
-                  <Button onClick={btnTrack} type="submit" className="bg-[#7856FF] text-white hover:bg-[#7856FF]/90">
+                  <Button id="subscribe" type="submit" className="bg-[#7856FF] text-white hover:bg-[#7856FF]/90">
                     Subscribe
                   </Button>
                 </form>
@@ -320,13 +323,14 @@ export default function HomePage() {
               </div>
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
                 <Link href="/signup">
-                  <Button onClick={btnTrack} size="lg" className="bg-[#07B096] text-white hover:bg-[#07B096]/90">
+                  <Button id="journey" size="lg" className="bg-[#07B096] text-white hover:bg-[#07B096]/90">
                     Start Your Journey
                   </Button>
                 </Link>
                 <Link href="/products">
                   <Button
-                    onClick={btnTrack}
+                    // onClick={btnTrack}
+					id="exploreProducts"
                     size="lg"
                     variant="outline"
                     className="border-[#07B096] text-[#07B096] hover:bg-[#07B096]/10"

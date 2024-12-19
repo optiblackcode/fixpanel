@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { btnTrack, pageTrack } from "../../components/Track"
+// import { btnTrack, pageTrack } from "../../components/Track"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CreditCardIcon, PieChartIcon, BellIcon, LockIcon, TrendingUpIcon, HeadphonesIcon } from "lucide-react";
@@ -10,7 +10,7 @@ import { Footer } from "@/components/Footer";
 
 export default function FeaturesPage() {
   useEffect(() => {
-    pageTrack("features");
+    // pageTrack("features");
   }, []);
   return (
     <div className="flex flex-col min-h-screen">
@@ -72,7 +72,7 @@ export default function FeaturesPage() {
             </div>
             <div className="flex justify-center">
               <Link href="/signup">
-                <Button size="lg" onClick={btnTrack}>Start Your Free Trial</Button>
+                <Button size="lg" id="trial">Start Your Free Trial</Button>
               </Link>
             </div>
           </div>
