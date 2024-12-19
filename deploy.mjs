@@ -49,6 +49,8 @@ async function main(bucketName = 'fixpanel', localDir = `out`, remotePath = '') 
 
 	console.log('\n----------\nUPLOAD COMPLETE\n----------\n');
 	console.log(JSON.stringify(results, null, 2));
+	const URL = `https://fixpanel.storage.googleapis.com/index.html`
+	console.log(`\n----------\nDEPLOYED TO: ${URL}\n----------\n`);
 	return results;
 }
 
