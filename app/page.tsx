@@ -198,7 +198,7 @@ export default function HomePage() {
                     {...modalConfig}
                     onClose={() => setIsModalOpen(false)}
                     onConfirm={() => {
-                      window.location.href = "/products";
+                      window.location.href = "/fixpanel/products";
                     }}
                   />
                 )}
