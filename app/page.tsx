@@ -48,9 +48,9 @@ export default function HomePage() {
   ];
 
   //   FEATURE FLAGS ORCHESTRATOR
-  useEffect(() => {
-    initMixpanel()
-      .then(() => {
+  function getFlag() {
+    return initMixpanel()
+      .then((mixpanel) => {
         //@ts-ignore
         const flag: string = mixpanel.flags.get_feature_data("rice_food");
         return flag;
@@ -63,7 +63,7 @@ export default function HomePage() {
         console.error("[MIXPANEL]: FLAG ERR\n", err);
         setVariant("Control");
       });
-  }, []);
+  }
 
   //   FEATURE FLAG DATA
   const modalConfig = useMemo(() => {
@@ -182,39 +182,41 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              {/* EXPERIMENTATION / FLAGGING */}
 
               <div
                 className={`
 					transition-opacity 
 					duration-2000 
-					ease-in-out 
-					${variant !== null ? "opacity-100" : "opacity-0"}
+					ease-in-out 					
 				  `}
               >
-                {variant !== null && (
-                  <>
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="bg-white text-[#CC332B] hover:bg-white/20"
-                      onClick={() => setIsModalOpen(true)}
-                    >
-                      <FlagIcon className="pr-2" />
-                      Customer Stories
-                    </Button>
 
-                    {/* Modal */}
-                    {isModalOpen && (
-                      <Modal
-                        {...modalConfig}
-                        onClose={() => setIsModalOpen(false)}
-                        onConfirm={() => {
-                          window.location.href = "/fixpanel/products";
-                        }}
-                      />
-                    )}
-                  </>
+
+              {/* EXPERIMENTATION / FLAGGING */}
+			  
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-white text-[#CC332B] hover:bg-white/20"
+                  onClick={() => {
+                    getFlag().then(() => {
+                      setIsModalOpen(true);
+                    });
+                  }}
+                >
+                  <FlagIcon className="pr-2" />
+                  Customer Stories
+                </Button>
+
+                {/* Modal */}
+                {isModalOpen && variant && (
+                  <Modal
+                    {...modalConfig}
+                    onClose={() => setIsModalOpen(false)}
+                    onConfirm={() => {
+                      window.location.href = "/fixpanel/products";
+                    }}
+                  />
                 )}
               </div>
             </div>
