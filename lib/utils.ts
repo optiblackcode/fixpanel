@@ -30,7 +30,7 @@ export function initMixpanel(): Promise<typeof mixpanel> {
 
     mixpanel.init(MIXPANEL_TOKEN, {
       // flags
-	  //@ts-ignore
+      //@ts-ignore
       flags: {
         context: {
           // default: { distinct_id: mixpanel.get_distinct_id() }
@@ -71,6 +71,20 @@ export function initMixpanel(): Promise<typeof mixpanel> {
           // expose for debugging
           // @ts-ignore
           window.mixpanel = mp;
+
+          //   monkey patch track to log to the console
+          const originalTrack = mp.track;
+          mp.track = function (event: string, props: any) {
+            console.log(`[MIXPANEL]: ${event}`, props);
+            originalTrack.call(mp, event, props);
+          };
+
+          //   monkey patch identify to log to the console
+          const originalIdentify = mp.identify;
+          mp.identify = function (distinctId: string) {
+            console.log(`[MIXPANEL]: IDENTIFY ${distinctId}`);
+            originalIdentify.call(mp, distinctId);
+          };
         }
         // @ts-ignore
         window.RESET = function () {

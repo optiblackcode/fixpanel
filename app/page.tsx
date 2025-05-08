@@ -56,7 +56,7 @@ export default function HomePage() {
         return flag;
       })
       .then((flagData) => {
-        console.log("[MIXPANEL]: GOT FLAGS\n", flagData);
+        console.log("[MIXPANEL]: GOT FLAGS", flagData);
         setVariant(flagData as Variant);
       })
       .catch((err) => {
@@ -72,10 +72,10 @@ export default function HomePage() {
         return {
           headline: "“FixPanel Supercharged My Savings!”",
           tagline: "— Sarah L., Small Business Owner [Variant A]",
-          copy: "“Thanks to FixPanel’s automated insights, I uncovered $15K in wasted fees last quarter. My bottom line has never looked better.”",
-          color: "#1C782D", 
-          bgColor: "#E6F9F0", 
-          copyColor: "#0F2D13", 
+          copy: "“Thanks to FixPanel’s automated insights, I uncovered $15K in wasted fees last quarter. My bottom line has never looked better. The top is a different story.”",
+          color: "#1C782D",
+          bgColor: "#E6F9F0",
+          copyColor: "#0F2D13",
           cancelText: "Not Now",
           confirmText: "Read Sarah’s Story",
           imgUrl: fooImage.src,
@@ -85,10 +85,10 @@ export default function HomePage() {
         return {
           headline: "“Investment ROI: 3× in 90 Days”",
           tagline: "— Marco P., Freelance Designer [Variant B]",
-          copy: "“I was skeptical, but FixPanel’s data-driven portfolio suggestions tripled my returns in under three months.”",
-          color: "#7856FF", 
-          bgColor: "#F3E8FF", 
-          copyColor: "#2E004E", 
+          copy: "“I was skeptical, but FixPanel’s data-driven portfolio suggestions tripled my returns in under three months. It was so reasonable.”",
+          color: "#7856FF",
+          bgColor: "#F3E8FF",
+          copyColor: "#2E004E",
           cancelText: "Maybe Later",
           confirmText: "See Marco’s Portfolio",
           imgUrl: barImage.src,
@@ -98,10 +98,10 @@ export default function HomePage() {
         return {
           headline: "“Zero Debt in 6 Months”",
           tagline: "— Priya S., Marketing Manager [Variant C]",
-          copy: "“With FixPanel’s budgeting wizard, I paid off $23K in credit-card debt faster than I ever thought possible.”",
-          color: "#CC332B", 
-          bgColor: "#FFEFEF", 
-          copyColor: "#3C0F0A", 
+          copy: "“With FixPanel’s budgeting wizard, I paid off $23K in credit-card debt faster than I ever thought possible. Mostly, I didn't pay it.”",
+          color: "#CC332B",
+          bgColor: "#FFEFEF",
+          copyColor: "#3C0F0A",
           cancelText: "Decline",
           confirmText: "Learn Priya’s Plan",
           imgUrl: bazImage.src,
@@ -113,11 +113,11 @@ export default function HomePage() {
           headline: "“Join Thousands of Success Stories”",
           tagline: "— Our Community [Control]",
           copy: "“From debt payoff to wealth building, FixPanel’s users are achieving their financial goals at record speed.”",
-          color: "#07B096", 
-          bgColor: "#E8FBF7", 
-          copyColor: "#00332E", 
+          color: "#07B096",
+          bgColor: "#E8FBF7",
+          copyColor: "#00332E",
           cancelText: "Dismiss",
-          confirmText: "Explore Testimonials"
+          confirmText: "Explore Testimonials",
         };
     }
   }, [variant]);
@@ -181,26 +181,40 @@ export default function HomePage() {
                   </Button>
                 </Link>
               </div>
-              <div>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-white text-[#CC332B] hover:bg-white/20"
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  <FlagIcon className="pr-2" />
-                  Customer Stories
-                </Button>
 
-                {/* Modal */}
-                {isModalOpen && (
-                  <Modal
-                    {...modalConfig}
-                    onClose={() => setIsModalOpen(false)}
-                    onConfirm={() => {
-                      window.location.href = "/fixpanel/products";
-                    }}
-                  />
+              {/* EXPERIMENTATION / FLAGGING */}
+
+              <div
+                className={`
+					transition-opacity 
+					duration-2000 
+					ease-in-out 
+					${variant !== null ? "opacity-100" : "opacity-0"}
+				  `}
+              >
+                {variant !== null && (
+                  <>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="bg-white text-[#CC332B] hover:bg-white/20"
+                      onClick={() => setIsModalOpen(true)}
+                    >
+                      <FlagIcon className="pr-2" />
+                      Customer Stories
+                    </Button>
+
+                    {/* Modal */}
+                    {isModalOpen && (
+                      <Modal
+                        {...modalConfig}
+                        onClose={() => setIsModalOpen(false)}
+                        onConfirm={() => {
+                          window.location.href = "/fixpanel/products";
+                        }}
+                      />
+                    )}
+                  </>
                 )}
               </div>
             </div>
