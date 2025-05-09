@@ -29,7 +29,7 @@ export function Header() {
         <Link className="text-sm font-medium hover:underline underline-offset-4" href="/features">
           Features
         </Link>
-        <Link className="text-sm font-medium hover:underline underline-offset-4" href="/products">
+        <Link className="text-sm font-medium hover:underline underline-offset-4" href="/product">
           Products
         </Link>
         <Link className="text-sm font-medium hover:underline underline-offset-4" href="/pricing">
@@ -42,14 +42,12 @@ export function Header() {
           About
         </Link>
         <Link
-          className="text-sm font-medium hover:underline underline-offset-4"
+          className="text-sm font-medium hover:underline underline-offset-4 text-red-500"
           href="#"
           onClick={() => {
-            mixpanel.track("END OF USER");
-            mixpanel.reset();
-            mixpanel.track("NEW USER");
-            window.scrollTo(0, 0);
-            window.location.reload();
+            if (window.RESET && typeof window.RESET === "function") {
+              window.RESET();
+            }
           }}
         >
           Reset

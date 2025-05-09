@@ -48,7 +48,7 @@ export function initMixpanel(): Promise<typeof mixpanel> {
       },
 
       // session replay
-      record_sessions_percent: 100,
+      record_sessions_percent: 0,
       record_inline_images: true,
       record_collect_fonts: true,
       record_mask_text_selector: "nope",
@@ -65,9 +65,12 @@ export function initMixpanel(): Promise<typeof mixpanel> {
       persistence: "localStorage",
 
       loaded: (mp: any) => {
-        console.log("\n[MIXPANEL]: LOADED\n");
+        console.log("[MIXPANEL]: LOADED");
+		console.log(`[MIXPANEL]: DISTINCT_ID: ${mp.get_distinct_id()}\n`);
         if (typeof window !== "undefined") {
-          console.log("\n[MIXPANEL]: EXPOSED GLOBALLY\n");
+          console.log("[MIXPANEL]: EXPOSED GLOBALLY");
+          mixpanel.start_session_recording();
+          console.log("[MIXPANEL]: START SESSION RECORDING");
           // expose for debugging
           // @ts-ignore
           window.mixpanel = mp;
@@ -75,7 +78,9 @@ export function initMixpanel(): Promise<typeof mixpanel> {
           //   monkey patch track to log to the console
           const originalTrack = mp.track;
           mp.track = function (event: string, props: any) {
-            console.log(`[MIXPANEL]: ${event}`, props);
+			if (typeof props !== "object" || !props) props = {};
+            if (Object.keys(props).length === 0) console.log(`[MIXPANEL]: ${event}`);
+            else console.log(`[MIXPANEL]: EVENT ${event}`, props);
             originalTrack.call(mp, event, props);
           };
 
@@ -85,13 +90,21 @@ export function initMixpanel(): Promise<typeof mixpanel> {
             console.log(`[MIXPANEL]: IDENTIFY ${distinctId}`);
             originalIdentify.call(mp, distinctId);
           };
+
+          // @ts-ignore
+          window.RESET = function () {
+            mp.track("[MIXPANEL]: END OF USER");
+            setTimeout(() => {
+              console.log("[MIXPANEL]: STOP SESSION RECORDING");
+              mp.stop_session_recording();
+              mp.reset();
+              console.log("[MIXPANEL]: RESET");
+              setTimeout(() => {
+                window.location.reload();
+              }, 500);
+            }, 500);
+          };
         }
-        // @ts-ignore
-        window.RESET = function () {
-          console.log("\n[MIXPANEL] RESETTING\n");
-          mp.reset();
-          window.location.reload();
-        };
 
         resolve(mp);
       },
@@ -113,4 +126,55 @@ export const trackPageView = (url: string) => {
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+/**
+ * Log every function on `obj`, including inherited ones, and
+ * then recurse into any nested objects.
+ */
+function documentAllMethods(obj: any, seen = new WeakSet(), indent = "") {
+  if (obj === null || seen.has(obj)) return;
+  seen.add(obj);
+
+  // 1) Log own methods (including non-enumerables & symbols)
+  for (const key of Reflect.ownKeys(obj)) {
+    let val;
+    try {
+      val = obj[key];
+    } catch {
+      // skip getters that throw
+      continue;
+    }
+    if (typeof val === "function") {
+      console.log(`${indent}${String(key)}()`);
+    }
+  }
+
+  // 2) Traverse *this* object’s prototype chain
+  const proto = Object.getPrototypeOf(obj);
+  if (proto && !seen.has(proto)) {
+    console.log(`${indent}[[Prototype]] → {`);
+    documentAllMethods(proto, seen, indent + "  ");
+    console.log(`${indent}}`);
+  }
+
+  // 3) Recurse into any nested objects
+  for (const key of Reflect.ownKeys(obj)) {
+    let val;
+    try {
+      val = obj[key];
+    } catch {
+      continue;
+    }
+    if (val && typeof val === "object") {
+      console.log(`${indent}${String(key)} → {`);
+      documentAllMethods(val, seen, indent + "  ");
+      console.log(`${indent}}`);
+    }
+  }
+}
+
+if (typeof window !== "undefined") {
+  // @ts-ignore
+  window.documentAllMethods = documentAllMethods;
 }

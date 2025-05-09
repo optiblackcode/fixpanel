@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		body {
+			font-family: system-ui, sans-serif;
+			max-width: 800px;
+			margin: 0 auto;
+			padding: 20px;
+			line-height: 1.6;
+		}
+
+		section {
+			margin-bottom: 30px;
+			padding: 15px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+		}
+
+		h2 {
+			margin-top: 0;
+			color: #333;
+		}
+
+		.element-container {
+			padding: 10px;
+			margin: 5px 0;
+			border-left: 3px solid #4a90e2;
+			background: #f5f5f5;
+		}
+
+		code {
+			background: #eee;
+			padding: 2px 4px;
+			border-radius: 3px;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+		}
+
+		th,
+		td {
+			border: 1px solid #ddd;
+			padding: 8px;
+			text-align: left;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		.color-box {
+			width: 50px;
+			height: 20px;
+			display: inline-block;
+			border: 1px solid #000;
+		}
+	</style>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1">
+	<title></title>
+	<!-- Paste this right before your closing </head> tag -->
+	<script type="text/javascript">
+		const MIXPANEL_TOKEN = "7c02ad22ae575ab4e15cdd052cd730fb";
+		const MIXPANEL_PROXY = `https://express-proxy-lmozz6xkha-uc.a.run.app`;
+		const MIXPANEL_CUSTOM_LIB_URL = `${MIXPANEL_PROXY}/lib.min.js`;
+		(function (f, b) { if (!b.__SV) { var e, g, i, h; window.mixpanel = b; b._i = []; b.init = function (e, f, c) { function g(a, d) { var b = d.split("."); 2 == b.length && ((a = a[b[0]]), (d = b[1])); a[d] = function () { a.push([d].concat(Array.prototype.slice.call(arguments, 0))); }; } var a = b; "undefined" !== typeof c ? (a = b[c] = []) : (c = "mixpanel"); a.people = a.people || []; a.toString = function (a) { var d = "mixpanel"; "mixpanel" !== c && (d += "." + c); a || (d += " (stub)"); return d; }; a.people.toString = function () { return a.toString(1) + ".people (stub)"; }; i = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" "); for (h = 0; h < i.length; h++) g(a, i[h]); var j = "set set_once union unset remove delete".split(" "); a.get_group = function () { function b(c) { d[c] = function () { call2_args = arguments; call2 = [c].concat(Array.prototype.slice.call(call2_args, 0)); a.push([e, call2]); }; } for (var d = {}, e = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < j.length; c++) b(j[c]); return d; }; b._i.push([e, f, c]); }; b.__SV = 1.2; e = f.createElement("script"); e.type = "text/javascript"; e.async = !0; e.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ? MIXPANEL_CUSTOM_LIB_URL : "file:" === f.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"; g = f.getElementsByTagName("script")[0]; g.parentNode.insertBefore(e, g); } })(document, window.mixpanel || []);
+	</script>
+</head>
+
+<body>
+	<h1 id="theHeading">HTML Elements Collection</h1>
+
+	<section>
+		<h2>Text Elements</h2>
+		<div class="element-container">
+			<p id="theParagraph">I am paragraph</p>
+			<h1 id="theH1">I am h1</h1>
+			<h2 id="theH2">I am h2</h2>
+			<h3 id="theH3">I am h3</h3>
+			<h4 id="theH4">I am h4</h4>
+			<h5 id="theH5">I am h5</h5>
+			<h6 id="theH6">I am h6</h6>
+			<span id="theSpan">I am span</span>
+			<div id="theDiv">I am div</div>
+			<blockquote id="theBlockquote">I am blockquote</blockquote>
+			<pre id="thePre">I am pre-formatted text</pre>
+			<code id="theCode">I am code</code>
+			<em id="theEm">I am emphasized</em>
+			<strong id="theStrong">I am strong</strong>
+			<mark id="theMark">I am marked/highlighted</mark>
+			<small id="theSmall">I am small text</small>
+			<del id="theDel">I am deleted text</del>
+			<ins id="theIns">I am inserted text</ins>
+			<sub id="theSub">I am subscript</sub>
+			<sup id="theSup">I am superscript</sup>
+			<abbr id="theAbbr"
+				title="Abbreviation">I am abbr</abbr>
+			<cite id="theCite">I am citation</cite>
+			<q id="theQ">I am inline quotation</q>
+			<kbd id="theKbd">I am keyboard input</kbd>
+			<samp id="theSamp">I am sample output</samp>
+			<var id="theVar">I am variable</var>
+			<time id="theTime"
+				datetime="2025-05-09">I am time: May 9, 2025</time>
+		</div>
+	</section>
+
+	<section>
+		<h2>Form Elements</h2>
+		<div class="element-container">
+			<form id="theForm">
+				<label id="theLabel"
+					for="theInput">I am label</label><br>
+				<input id="theInput"
+					type="text"
+					placeholder="I am text input"><br>
+				<input id="theCheckbox"
+					type="checkbox"> I am checkbox<br>
+				<input id="theRadio"
+					type="radio"
+					name="radio"> I am radio button<br>
+				<textarea id="theTextarea"
+					placeholder="I am textarea"></textarea><br>
+				<select id="theSelect">
+					<option id="theOption">I am option</option>
+					<optgroup id="theOptgroup"
+						label="I am optgroup">
+						<option>Option within group</option>
+					</optgroup>
+				</select><br>
+				<button id="theButton">I am button</button><br>
+				<fieldset id="theFieldset">
+					<legend id="theLegend">I am legend inside fieldset</legend>
+					<input type="radio"
+						name="group"> Option 1<br>
+					<input type="radio"
+						name="group"> Option 2
+				</fieldset><br>
+				<datalist id="theDatalist">
+					<option value="Option 1">
+					<option value="Option 2">
+				</datalist>
+				<input list="theDatalist"
+					placeholder="I use datalist">
+				<output id="theOutput"
+					for="a b">I am output</output><br>
+				<progress id="theProgress"
+					value="70"
+					max="100">70%</progress><br>
+				<meter id="theMeter"
+					value="0.7"
+					min="0"
+					max="1">70%</meter><br>
+			</form>
+		</div>
+	</section>
+
+	<section>
+		<h2>List Elements</h2>
+		<div class="element-container">
+			<ul id="theUl">
+				<li id="theLi">I am list item in unordered list</li>
+				<li>Another list item</li>
+			</ul>
+
+			<ol id="theOl">
+				<li>I am list item in ordered list</li>
+				<li>Another ordered list item</li>
+			</ol>
+
+			<dl id="theDl">
+				<dt id="theDt">I am definition term</dt>
+				<dd id="theDd">I am definition description</dd>
+			</dl>
+
+			<menu id="theMenu">
+				<menuitem id="theMenuItem">I am menu item</menuitem>
+			</menu>
+		</div>
+	</section>
+
+	<section>
+		<h2>Table Elements</h2>
+		<div class="element-container">
+			<table id="theTable">
+				<caption id="theCaption">I am caption</caption>
+				<colgroup id="theColgroup">
+					<col id="theCol"
+						style="background-color: #f0f0f0">
+				</colgroup>
+				<thead id="theThead">
+					<tr id="theTr">
+						<th id="theTh">I am table header</th>
+						<th>Header 2</th>
+					</tr>
+				</thead>
+				<tbody id="theTbody">
+					<tr>
+						<td id="theTd">I am table data</td>
+						<td>Data 2</td>
+					</tr>
+				</tbody>
+				<tfoot id="theTfoot">
+					<tr>
+						<td colspan="2">I am table footer</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</section>
+
+	<section>
+		<h2>Media & Embedded Elements</h2>
+		<div class="element-container">
+			<img id="theImage"
+				src="#"
+				alt="I am image"><br>
+			<audio id="theAudio"
+				controls>
+				<source id="theSource"
+					src="#"
+					type="audio/mpeg">
+				I am audio (controls shown but no actual audio loaded)
+			</audio><br>
+			<video id="theVideo"
+				width="200"
+				height="100"
+				controls>
+				I am video (controls shown but no actual video loaded)
+			</video><br>
+			<figure id="theFigure">
+				<img src="#"
+					alt="Small placeholder">
+				<figcaption id="theFigcaption">I am figcaption in figure</figcaption>
+			</figure>
+			<iframe id="theIframe"
+				src="about:blank"
+				width="200"
+				height="60">I am iframe</iframe><br>
+			<embed id="theEmbed"
+				src="about:blank"
+				width="200"
+				height="30">
+			<object id="theObject"
+				width="200"
+				height="30">I am object</object>
+			<param id="theParam"
+				name="name"
+				value="value">
+			<map id="theMap"
+				name="workmap">
+				<area id="theArea"
+					shape="rect"
+					coords="0,0,100,100"
+					href="#"
+					alt="I am area">
+			</map>
+			<canvas id="theCanvas"
+				width="100"
+				height="30">I am canvas</canvas>
+			<svg id="theSvg"
+				width="100"
+				height="30">
+				<rect width="100"
+					height="30"
+					style="fill:rgb(120,120,240);" />
+				<text x="10"
+					y="20"
+					fill="white">I am SVG</text>
+			</svg>
+			<picture id="thePicture">
+				<source media="(min-width: 650px)"
+					srcset="#">
+				<img src="#"
+					alt="Picture element">
+			</picture>
+		</div>
+	</section>
+
+	<section>
+		<h2>Semantic Elements</h2>
+		<div class="element-container">
+			<article id="theArticle">I am article</article>
+			<aside id="theAside">I am aside</aside>
+			<details id="theDetails">
+				<summary id="theSummary">I am summary (click me)</summary>
+				I am details content that appears when summary is clicked.
+			</details>
+			<footer id="theFooter">I am footer</footer>
+			<header id="theHeader">I am header</header>
+			<main id="theMain">I am main</main>
+			<nav id="theNav">I am nav</nav>
+			<section id="theSection">I am section</section>
+			<address id="theAddress">I am address</address>
+			<dialog id="theDialog"
+				open>I am dialog</dialog>
+		</div>
+	</section>
+
+	<section>
+		<h2>Interactive & Linking Elements</h2>
+		<div class="element-container">
+			<a id="theLink"
+				href="#">I am link</a><br>
+			<dfn id="theDfn">I am definition</dfn><br>
+			<bdo id="theBdo"
+				dir="rtl">I am bidirectional override (right to left)</bdo><br>
+			<bdi id="theBdi">I am bidirectional isolate</bdi><br>
+			<ruby id="theRuby">
+				漢 <rt id="theRt">han</rt>
+				<rp id="theRp">(han)</rp>
+			</ruby><br>
+			<wbr id="theWbr">I am word break opportunity<wbr>atthispoint<br>
+			<noscript id="theNoscript">I am noscript (visible when JavaScript is disabled)</noscript>
+			<template id="theTemplate">
+				<div>I am template (not rendered until used by JavaScript)</div>
+			</template>
+			<slot id="theSlot"
+				name="slotname">I am slot (used in web components)</slot>
+		</div>
+	</section>
+
+	<section>
+		<h2>Other Elements</h2>
+		<div class="element-container">
+			<hr id="theHr">
+			<br id="theBr">
+			<data id="theData"
+				value="123">I am data</data><br>
+			<track id="theTrack"
+				kind="subtitles"
+				src="#"
+				srclang="en"
+				label="English">
+		</div>
+	</section>
+
+	<script src="mixpanel.js"></script>
+</body>
+
+</html>

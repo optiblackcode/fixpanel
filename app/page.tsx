@@ -9,7 +9,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Modal } from "@/components/Modal";
 // import mixpanel from "mixpanel-browser";
-type Variant = "A" | "B" | "C" | "Control";
+type Variant = "A" | "B" | "C" | "D" | null;
 import mixpanel from "mixpanel-browser";
 import { initMixpanel } from "../lib/utils";
 
@@ -48,21 +48,18 @@ export default function HomePage() {
   ];
 
   //   FEATURE FLAGS ORCHESTRATOR
-  function getFlag() {
-    return initMixpanel()
-      .then((mixpanel) => {
-        //@ts-ignore
-        const flag: string = mixpanel.flags.get_feature_data("rice_food");
-        return flag;
-      })
-      .then((flagData) => {
-        console.log("[MIXPANEL]: GOT FLAGS", flagData);
-        setVariant(flagData as Variant);
-      })
-      .catch((err) => {
-        console.error("[MIXPANEL]: FLAG ERR\n", err);
-        setVariant("Control");
-      });
+  async function getFlag(): Promise<void> {
+    try {
+      const mp = await initMixpanel();
+      const experimentId = "exp_customerStory"; //https://mixpanel.com/project/3276012/view/3782804/app/feature-flags/c4bf3cf0-658f-486c-b403-14d5535f4661
+      const flagDataFromMixpanel: Variant = await mp.flags.get_feature_data(experimentId);
+      console.log("[MIXPANEL]: GOT FLAG", flagDataFromMixpanel);
+      setVariant(flagDataFromMixpanel);
+
+    } catch (err) {
+      console.error("[MIXPANEL]: FLAG ERR\n", err);
+      setVariant(null);
+    }
   }
 
   //   FEATURE FLAG DATA
@@ -107,8 +104,7 @@ export default function HomePage() {
           imgUrl: bazImage.src,
         };
 
-      default:
-        // Control
+      case "D":
         return {
           headline: "“Join Thousands of Success Stories”",
           tagline: "— Our Community [Control]",
@@ -118,6 +114,10 @@ export default function HomePage() {
           copyColor: "#00332E",
           cancelText: "Dismiss",
           confirmText: "Explore Testimonials",
+        };
+      default:
+        return {
+          headline: "oh no something went wrong...",
         };
     }
   }, [variant]);
@@ -182,7 +182,6 @@ export default function HomePage() {
                 </Link>
               </div>
 
-
               <div
                 className={`
 					transition-opacity 
@@ -190,10 +189,8 @@ export default function HomePage() {
 					ease-in-out 					
 				  `}
               >
+                {/* EXPERIMENTATION / FLAGGING */}
 
-
-              {/* EXPERIMENTATION / FLAGGING */}
-			  
                 <Button
                   size="lg"
                   variant="outline"
@@ -214,7 +211,7 @@ export default function HomePage() {
                     {...modalConfig}
                     onClose={() => setIsModalOpen(false)}
                     onConfirm={() => {
-                      window.location.href = "/fixpanel/products";
+                      window.location.href = "/fixpanel/product";
                     }}
                   />
                 )}
@@ -242,9 +239,9 @@ export default function HomePage() {
                 <p className="text-sm text-gray-500 text-center">
                   Our patented technology turns cents into dollars. It's like magic, but with more spreadsheets.
                 </p>
-                <Link href="/products">
+                <Link href="/product">
                   <Button id="explore" variant="outline" className="mt-4">
-                    Explore Products
+                    Explore Product
                   </Button>
                 </Link>
               </div>
@@ -308,7 +305,7 @@ export default function HomePage() {
                   "Meow meow meow. Hiss. Hiss. (Translation: My returns are purrfect thanks to FixPanel! I wish I'd
                   invested sooner.)"
                 </p>
-                <Link href="/products">
+                <Link href="/product">
                   <Button id="purrfectReturns" className="mt-4 bg-[#07B096] text-white hover:bg-[#07B096]/90">
                     Get Purrfect Returns
                   </Button>
@@ -446,7 +443,7 @@ export default function HomePage() {
                     Start Your Journey
                   </Button>
                 </Link>
-                <Link href="/products">
+                <Link href="/product">
                   <Button
                     // onClick={btnTrack}
                     id="exploreProducts"
