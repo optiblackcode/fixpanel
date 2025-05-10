@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-// import { btnTrack, pageTrack } from "../components/Track";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Modal } from "@/components/Modal";
-// import mixpanel from "mixpanel-browser";
+
 type Variant = "A" | "B" | "C" | "D" | null;
 import mixpanel from "mixpanel-browser";
 import { initMixpanel } from "../lib/utils";
@@ -160,8 +160,7 @@ export default function HomePage() {
                 <Link href="/signup" className="pr-10">
                   <Button
                     size="lg"
-                    className="bg-white text-[#7856FF]  hover:bg-white/20 hover:text-black"
-                    // onClick={btnTrack}
+                    className="bg-white text-[#7856FF]  hover:bg-white/20 hover:text-black"                    
                     id="getStarted"
                   >
                     <GemIcon className="pr-2" />
@@ -172,8 +171,7 @@ export default function HomePage() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="bg-white text-[#1c782d] hover:bg-white/20"
-                    // onClick={btnTrack}
+                    className="bg-white text-[#1c782d] hover:bg-white/20"                    
                     id="memberLogin"
                   >
                     <WalletIcon className="pr-2" />
@@ -386,7 +384,6 @@ export default function HomePage() {
                   id="financialFortune"
                   onClick={(e) => {
                     getFinancialFortune();
-                    // btnTrack(e);
                   }}
                   className="w-full bg-white text-[#CC332B] hover:bg-gray-100"
                 >
@@ -445,7 +442,6 @@ export default function HomePage() {
                 </Link>
                 <Link href="/product">
                   <Button
-                    // onClick={btnTrack}
                     id="exploreProducts"
                     size="lg"
                     variant="outline"

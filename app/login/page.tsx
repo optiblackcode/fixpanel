@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-// import { btnTrack, pageTrack } from "../../components/Track";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -13,7 +13,7 @@ import { Footer } from "@/components/Footer";
 
 export default function Component() {
   useEffect(() => {
-    // pageTrack("login");
+    
   }, []);
 
   const [email, setEmail] = useState("");

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect } from "react";
-// import { btnTrack, pageTrack } from "../../components/Track"
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CreditCardIcon, CheckIcon } from "lucide-react";
@@ -9,7 +9,7 @@ import { Footer } from "@/components/Footer";
 
 export default function PricingPage() {
   useEffect(() => {
-    // pageTrack("pricing");
+    
   }, []);
 
 

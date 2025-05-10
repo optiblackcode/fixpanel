@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-// import { btnTrack, pageTrack } from "../../components/Track"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CreditCardIcon, ArrowRightIcon, ArrowLeftIcon } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import mixpanel from "mixpanel-browser";
 
 export default function SignUpPage() {
   const [step, setStep] = useState(1);
@@ -25,7 +25,7 @@ export default function SignUpPage() {
   });
 
   useEffect(() => {
-    // pageTrack("signup");
+
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,11 +66,11 @@ export default function SignUpPage() {
     e.preventDefault();
     // Here you would typically send the form data to your backend
     console.log("Sign up form submitted", formData);
-    if (mixpanel) {
+
       const formTrackingProps = Object.assign({}, formData);
       formTrackingProps?.password === "*********";
       mixpanel.track("sign up submit", formTrackingProps);
-    }
+    
   };
 
   return (
@@ -215,7 +215,7 @@ export default function SignUpPage() {
 					id="previous"
                     onClick={(e) => {
                       handlePrevious();
-                    //   btnTrack(e);
+                    
                     }}
                     variant="outline"                    
                   >
@@ -228,7 +228,7 @@ export default function SignUpPage() {
 					id="next"
                     onClick={(e) => {
                       handleNext();
-                    //   btnTrack(e);
+                    
                     }}
                     disabled={!isStepValid()}
                     className="ml-auto"

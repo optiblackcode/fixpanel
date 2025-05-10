@@ -31,11 +31,7 @@ export function initMixpanel(): Promise<typeof mixpanel> {
     mixpanel.init(MIXPANEL_TOKEN, {
       // flags
       //@ts-ignore
-      flags: {
-        context: {
-          // default: { distinct_id: mixpanel.get_distinct_id() }
-        },
-      },
+      flags: {},
 
       // autocapture
       autocapture: {
@@ -105,7 +101,6 @@ export function initMixpanel(): Promise<typeof mixpanel> {
             }, 500);
           };
         }
-
         resolve(mp);
       },
     });

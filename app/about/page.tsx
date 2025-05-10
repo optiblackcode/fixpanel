@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect } from "react";
-// import { btnTrack, pageTrack } from "../../components/Track"
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CreditCardIcon, Users2Icon, TrendingUpIcon, ShieldCheckIcon } from "lucide-react";
@@ -10,7 +9,7 @@ import { Footer } from "@/components/Footer";
 
 export default function AboutPage() {
   useEffect(() => {
-    // pageTrack("about");
+
   }, []);
 
   return (

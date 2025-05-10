@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-// import { btnTrack, pageTrack } from "../../components/Track"
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { CreditCardIcon, PieChartIcon, BellIcon, LockIcon, TrendingUpIcon, HeadphonesIcon } from "lucide-react";
@@ -10,7 +10,6 @@ import { Footer } from "@/components/Footer";
 
 export default function FeaturesPage() {
   useEffect(() => {
-    // pageTrack("features");
   }, []);
   return (
     <div className="flex flex-col min-h-screen">

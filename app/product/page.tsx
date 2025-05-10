@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-// import { btnTrack, pageTrack } from "../../components/Track"
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,7 +34,7 @@ import {
 
 export default function ProductsPage() {
   useEffect(() => {
-    // pageTrack("products");
+    
   }, []);
 
   const [investmentAmount, setInvestmentAmount] = useState(5000);
@@ -148,7 +148,7 @@ export default function ProductsPage() {
                     id="rebalance"
                     onClick={(e) => {
                       rebalancePortfolio();
-                      //   btnTrack(e);
+                      
                     }}
                     size="sm"
                   >
@@ -183,7 +183,7 @@ export default function ProductsPage() {
                   id="increaseInvestment"
                   onClick={(e) => {
                     toggleInvestmentAction("increase");
-                    // btnTrack(e);
+                    
                   }}
                 >
                   <TrendingUpIcon className="mr-2 h-4 w-4" />
@@ -197,7 +197,7 @@ export default function ProductsPage() {
                   }`}
                   onClick={(e) => {
                     toggleInvestmentAction("decrease");
-                    // btnTrack(e);
+                    
                   }}
                 >
                   <TrendingDownIcon className="mr-2 h-4 w-4" />
@@ -246,7 +246,7 @@ export default function ProductsPage() {
 				  id="increaseSavings"
                   onClick={(e) => {
                     toggleSavingsAction("increase");
-                    // btnTrack(e);
+                    
                   }}
                 >
                   <TrendingUpIcon className="mr-2 h-4 w-4" />
@@ -295,7 +295,7 @@ export default function ProductsPage() {
                   className={`w-full ${activeExpenseAction === "reduce" ? "bg-green-500 hover:bg-green-600" : ""}`}
                   onClick={(e) => {
                     toggleExpenseAction("reduce");
-                    // btnTrack(e);
+                    
                   }}
                 >
                   <TrendingDownIcon className="mr-2 h-4 w-4" />
