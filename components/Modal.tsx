@@ -2,17 +2,18 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
+import mixpanel from "mixpanel-browser";
 
 interface ModalProps {
   headline?: string;
   tagline?: string;
   copy?: string;
-  color?: string;           // border top color
-  bgColor?: string;         // panel background
-  copyColor?: string;       // text color
-  cancelText?: string;      // label for Cancel button
-  confirmText?: string;     // label for Confirm button
-  imgUrl?: string;          // optional image above copy
+  color?: string; // border top color
+  bgColor?: string; // panel background
+  copyColor?: string; // text color
+  cancelText?: string; // label for Cancel button
+  confirmText?: string; // label for Confirm button
+  imgUrl?: string; // optional image above copy
   onClose: () => void;
   onConfirm: () => void;
 }
@@ -30,13 +31,21 @@ export const Modal: React.FC<ModalProps> = ({
   onClose,
   onConfirm,
 }) => {
+  React.useEffect(() => {
+    async function getFlag() {
+    //   console.log("hello from modal.tsx");
+      //  const mp = await initMixpanel();
+      const experimentId = "exp_customerStory"; //https://mixpanel.com/project/3276012/view/3782804/app/feature-flags/c4bf3cf0-658f-486c-b403-14d5535f4661
+      const flagDataFromMixpanel = await mixpanel.flags.get_feature_data(experimentId);
+    //   console.log("MODAL.TSX: GOT FLAG", flagDataFromMixpanel);
+    }
+
+    getFlag();
+  });
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* backdrop */}
-      <div
-        className="absolute inset-0 bg-black opacity-50"
-        onClick={onClose}
-      />
+      <div className="absolute inset-0 bg-black opacity-50" onClick={onClose} />
 
       {/* modal panel */}
       <div
@@ -50,13 +59,7 @@ export const Modal: React.FC<ModalProps> = ({
         <h2 className="text-2xl font-bold mb-2">{headline}</h2>
         <h3 className="text-lg font-semibold mb-4">{tagline}</h3>
 
-        {imgUrl && (
-          <img
-            src={imgUrl}
-            alt=""
-			className="mb-4 w-full max-h-24 max-w-20 object-cover rounded mx-auto"
-			/>
-        )}
+        {imgUrl && <img src={imgUrl} alt="" className="mb-4 w-full max-h-24 max-w-20 object-cover rounded mx-auto" />}
 
         <p className="text-base mb-6">{copy}</p>
 
@@ -64,9 +67,7 @@ export const Modal: React.FC<ModalProps> = ({
           <Button variant="outline" onClick={onClose}>
             {cancelText}
           </Button>
-          <Button onClick={onConfirm}>
-            {confirmText}
-          </Button>
+          <Button onClick={onConfirm}>{confirmText}</Button>
         </div>
       </div>
     </div>

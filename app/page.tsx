@@ -50,12 +50,12 @@ export default function HomePage() {
   //   FEATURE FLAGS ORCHESTRATOR
   async function getFlag(): Promise<void> {
     try {
-      const mp = await initMixpanel();
+      
       const experimentId = "exp_customerStory"; //https://mixpanel.com/project/3276012/view/3782804/app/feature-flags/c4bf3cf0-658f-486c-b403-14d5535f4661
-      const flagDataFromMixpanel: Variant = await mp.flags.get_feature_data(experimentId);
+	  console.log("[MIXPANEL]: GETTING FLAG", experimentId);
+      const flagDataFromMixpanel: Variant = await mixpanel.flags.get_feature_data(experimentId);
       console.log("[MIXPANEL]: GOT FLAG", flagDataFromMixpanel);
       setVariant(flagDataFromMixpanel);
-
     } catch (err) {
       console.error("[MIXPANEL]: FLAG ERR\n", err);
       setVariant(null);
@@ -160,7 +160,7 @@ export default function HomePage() {
                 <Link href="/signup" className="pr-10">
                   <Button
                     size="lg"
-                    className="bg-white text-[#7856FF]  hover:bg-white/20 hover:text-black"                    
+                    className="bg-white text-[#7856FF]  hover:bg-white/20 hover:text-black"
                     id="getStarted"
                   >
                     <GemIcon className="pr-2" />
@@ -171,7 +171,7 @@ export default function HomePage() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="bg-white text-[#1c782d] hover:bg-white/20"                    
+                    className="bg-white text-[#1c782d] hover:bg-white/20"
                     id="memberLogin"
                   >
                     <WalletIcon className="pr-2" />
