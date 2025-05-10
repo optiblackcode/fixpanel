@@ -50,9 +50,7 @@ export default function HomePage() {
   //   FEATURE FLAGS ORCHESTRATOR
   async function getFlag(): Promise<void> {
     try {
-      
       const experimentId = "exp_customerStory"; //https://mixpanel.com/project/3276012/view/3782804/app/feature-flags/c4bf3cf0-658f-486c-b403-14d5535f4661
-	  console.log("[MIXPANEL]: GETTING FLAG", experimentId);
       const flagDataFromMixpanel: Variant = await mixpanel.flags.get_feature_data(experimentId);
       console.log("[MIXPANEL]: GOT FLAG", flagDataFromMixpanel);
       setVariant(flagDataFromMixpanel);

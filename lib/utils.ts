@@ -62,7 +62,7 @@ export function initMixpanel(): Promise<typeof mixpanel> {
 
       loaded: (mp: any) => {
         console.log("[MIXPANEL]: LOADED");
-		console.log(`[MIXPANEL]: DISTINCT_ID: ${mp.get_distinct_id()}\n`);
+        console.log(`[MIXPANEL]: DISTINCT_ID: ${mp.get_distinct_id()}\n`);
         if (typeof window !== "undefined") {
           console.log("[MIXPANEL]: EXPOSED GLOBALLY");
           mixpanel.start_session_recording();
@@ -74,7 +74,7 @@ export function initMixpanel(): Promise<typeof mixpanel> {
           //   monkey patch track to log to the console
           const originalTrack = mp.track;
           mp.track = function (event: string, props: any) {
-			if (typeof props !== "object" || !props) props = {};
+            if (typeof props !== "object" || !props) props = {};
             if (Object.keys(props).length === 0) console.log(`[MIXPANEL]: ${event}`);
             else console.log(`[MIXPANEL]: EVENT ${event}`, props);
             originalTrack.call(mp, event, props);
@@ -89,14 +89,16 @@ export function initMixpanel(): Promise<typeof mixpanel> {
 
           // @ts-ignore
           window.RESET = function () {
-            mp.track("[MIXPANEL]: END OF USER");
             setTimeout(() => {
-              console.log("[MIXPANEL]: STOP SESSION RECORDING");
-              mp.stop_session_recording();
-              mp.reset();
-              console.log("[MIXPANEL]: RESET");
+              mp.track("END OF USER");
               setTimeout(() => {
-                window.location.reload();
+                console.log("[MIXPANEL]: STOP SESSION RECORDING");
+                mp.stop_session_recording();
+                mp.reset();
+                console.log("[MIXPANEL]: RESET");
+                setTimeout(() => {
+                  window.location.reload();
+                }, 500);
               }, 500);
             }, 500);
           };
