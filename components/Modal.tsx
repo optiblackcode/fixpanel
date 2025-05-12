@@ -69,7 +69,7 @@ const getModalData = (v?: Variant): ContentProps => {
     case "no story (D)":
       return {
         headline: "“Join Thousands of Success Stories”",
-        tagline: "— Our Community [Control]",
+        tagline: "— Our Community [Variant D]",
         copy: "“From debt payoff to wealth building…”",
         color: "#07B096",
         bgColor: "#E8FBF7",
