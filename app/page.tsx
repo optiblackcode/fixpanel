@@ -9,9 +9,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Modal } from "@/components/Modal";
 
-type Variant = "A" | "B" | "C" | "D" | null;
-import mixpanel from "mixpanel-browser";
-import { initMixpanel } from "../lib/utils";
 
 import {
   ChartBarIcon,
@@ -37,7 +34,6 @@ export default function HomePage() {
   const [fortune, setFortune] = useState("");
   const [tagline, setTagline] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [variant, setVariant] = useState<Variant | null>(null);
 
   const fortunes = [
     "Smart budgeting today leads to a wealthier tomorrow.",
@@ -46,79 +42,6 @@ export default function HomePage() {
     "New financial opportunities will bring long-term rewards.",
     "Your careful analysis will soon lead to significant savings.",
   ];
-
-  //   FEATURE FLAGS ORCHESTRATOR
-  async function getFlag(): Promise<void> {
-    try {
-      const experimentId = "exp_customerStory"; //https://mixpanel.com/project/3276012/view/3782804/app/feature-flags/c4bf3cf0-658f-486c-b403-14d5535f4661
-      const flagDataFromMixpanel: Variant = await mixpanel.flags.get_feature_data(experimentId);
-      console.log("[MIXPANEL]: GOT FLAG", flagDataFromMixpanel);
-      setVariant(flagDataFromMixpanel);
-    } catch (err) {
-      console.error("[MIXPANEL]: FLAG ERR\n", err);
-      setVariant(null);
-    }
-  }
-
-  //   FEATURE FLAG DATA
-  const modalConfig = useMemo(() => {
-    switch (variant) {
-      case "A":
-        return {
-          headline: "“FixPanel Supercharged My Savings!”",
-          tagline: "— Sarah L., Small Business Owner [Variant A]",
-          copy: "“Thanks to FixPanel’s automated insights, I uncovered $15K in wasted fees last quarter. My bottom line has never looked better. The top is a different story.”",
-          color: "#1C782D",
-          bgColor: "#E6F9F0",
-          copyColor: "#0F2D13",
-          cancelText: "Not Now",
-          confirmText: "Read Sarah’s Story",
-          imgUrl: fooImage.src,
-        };
-
-      case "B":
-        return {
-          headline: "“Investment ROI: 3× in 90 Days”",
-          tagline: "— Marco P., Freelance Designer [Variant B]",
-          copy: "“I was skeptical, but FixPanel’s data-driven portfolio suggestions tripled my returns in under three months. It was so reasonable.”",
-          color: "#7856FF",
-          bgColor: "#F3E8FF",
-          copyColor: "#2E004E",
-          cancelText: "Maybe Later",
-          confirmText: "See Marco’s Portfolio",
-          imgUrl: barImage.src,
-        };
-
-      case "C":
-        return {
-          headline: "“Zero Debt in 6 Months”",
-          tagline: "— Priya S., Marketing Manager [Variant C]",
-          copy: "“With FixPanel’s budgeting wizard, I paid off $23K in credit-card debt faster than I ever thought possible. Mostly, I didn't pay it.”",
-          color: "#CC332B",
-          bgColor: "#FFEFEF",
-          copyColor: "#3C0F0A",
-          cancelText: "Decline",
-          confirmText: "Learn Priya’s Plan",
-          imgUrl: bazImage.src,
-        };
-
-      case "D":
-        return {
-          headline: "“Join Thousands of Success Stories”",
-          tagline: "— Our Community [Control]",
-          copy: "“From debt payoff to wealth building, FixPanel’s users are achieving their financial goals at record speed.”",
-          color: "#07B096",
-          bgColor: "#E8FBF7",
-          copyColor: "#00332E",
-          cancelText: "Dismiss",
-          confirmText: "Explore Testimonials",
-        };
-      default:
-        return {
-          headline: "oh no something went wrong...",
-        };
-    }
-  }, [variant]);
 
   useEffect(() => {
     const taglines = [
@@ -152,7 +75,7 @@ export default function HomePage() {
                 <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none">
                   Welcome to FixPanel
                 </h1>
-                <p className="mx-auto max-w-[700px] text-xl md:text-2xl">{tagline}</p>
+                <p className="mx-auto max-w-[700px] text-xl md:text-2xl transition-opacity duration-1000 ease-in-out">{tagline}</p>
               </div>
               <div className="space-y-2">
                 <Link href="/signup" className="pr-10">
@@ -192,9 +115,7 @@ export default function HomePage() {
                   variant="outline"
                   className="bg-white text-[#CC332B] hover:bg-white/20"
                   onClick={() => {
-                    getFlag().then(() => {
-                      setIsModalOpen(true);
-                    });
+                    setIsModalOpen(true);
                   }}
                 >
                   <FlagIcon className="pr-2" />
@@ -202,12 +123,10 @@ export default function HomePage() {
                 </Button>
 
                 {/* Modal */}
-                {isModalOpen && variant && (
-                  <Modal
-                    {...modalConfig}
-                    onClose={() => setIsModalOpen(false)}
-                    onConfirm={() => {
-                      window.location.href = "/fixpanel/product";
+                {isModalOpen && (
+                  <Modal					
+                    onClose={() => {
+                      setIsModalOpen(false);
                     }}
                   />
                 )}

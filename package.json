@@ -1,7 +1,7 @@
 {
-	"name": "finance-site",
-	"version": "0.1.0",
-	"private": true,
+	"name": "fixpanel",
+	"version": "1.00",
+	"private": false,
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",

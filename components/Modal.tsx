@@ -2,52 +2,124 @@
 
 import * as React from "react";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import mixpanel from "mixpanel-browser";
+import fooImage from "../app/images/foo.png";
+import barImage from "../app/images/bar.png";
+import bazImage from "../app/images/baz.png";
 
-interface ModalProps {
+interface ContentProps {
   headline?: string;
   tagline?: string;
   copy?: string;
-  color?: string; // border top color
-  bgColor?: string; // panel background
-  copyColor?: string; // text color
-  cancelText?: string; // label for Cancel button
-  confirmText?: string; // label for Confirm button
-  imgUrl?: string; // optional image above copy
-  onClose: () => void;
-  onConfirm: () => void;
+  color?: string;
+  bgColor?: string;
+  copyColor?: string;
+  cancelText?: string;
+  confirmText?: string;
+  imgUrl?: string;
 }
 
-export const Modal: React.FC<ModalProps> = ({
-  headline = "I am a headline",
-  tagline = "I am a tagline",
-  copy = "I am a copy",
-  color = "blue",
-  bgColor = "white",
-  copyColor = "black",
-  cancelText = "Cancel",
-  confirmText = "Confirm",
-  imgUrl,
-  onClose,
-  onConfirm,
-}) => {
-  React.useEffect(() => {
-    async function getFlag() {
-    //   console.log("hello from modal.tsx");
-      //  const mp = await initMixpanel();
-      const experimentId = "exp_customerStory"; //https://mixpanel.com/project/3276012/view/3782804/app/feature-flags/c4bf3cf0-658f-486c-b403-14d5535f4661
-      const flagDataFromMixpanel = await mixpanel.flags.get_feature_data(experimentId);
-    //   console.log("MODAL.TSX: GOT FLAG", flagDataFromMixpanel);
-    }
+export interface ModalProps extends Partial<ContentProps> {
+  onClose?: () => void;
+  onConfirm?: () => void;
+}
 
-    getFlag();
-  });
+const experimentId = "exp_customerStory"; //? https://bit.ly/43siFeM (Mixpanel Flag Key!)
+type Variant = "no story (D)" | "sarah story (A)" | "marco portfolio (B)" | "priya debt (C)"; // ? mixpanel flag values
+
+const getModalData = (v?: Variant): ContentProps => {
+  switch (v) {
+    case "sarah story (A)":
+      return {
+        headline: "“FixPanel Supercharged My Savings!”",
+        tagline: "— Sarah L., Small Business Owner [Variant A]",
+        copy: "“Thanks to FixPanel’s automated insights…”",
+        color: "#1C782D",
+        bgColor: "#E6F9F0",
+        copyColor: "#0F2D13",
+        cancelText: "Not Now",
+        confirmText: "Read Sarah’s Story",
+        imgUrl: fooImage.src,
+      };
+    case "marco portfolio (B)":
+      return {
+        headline: "“Investment ROI: 3× in 90 Days”",
+        tagline: "— Marco P., Freelance Designer [Variant B]",
+        copy: "“I was skeptical, but FixPanel’s data-driven portfolio…”",
+        color: "#7856FF",
+        bgColor: "#F3E8FF",
+        copyColor: "#2E004E",
+        cancelText: "Maybe Later",
+        confirmText: "See Marco’s Portfolio",
+        imgUrl: barImage.src,
+      };
+    case "priya debt (C)":
+      return {
+        headline: "“Zero Debt in 6 Months”",
+        tagline: "— Priya S., Marketing Manager [Variant C]",
+        copy: "“With FixPanel’s budgeting wizard, I paid off $23K…”",
+        color: "#CC332B",
+        bgColor: "#FFEFEF",
+        copyColor: "#3C0F0A",
+        cancelText: "Decline",
+        confirmText: "Learn Priya’s Plan",
+        imgUrl: bazImage.src,
+      };
+    case "no story (D)":
+      return {
+        headline: "“Join Thousands of Success Stories”",
+        tagline: "— Our Community [Control]",
+        copy: "“From debt payoff to wealth building…”",
+        color: "#07B096",
+        bgColor: "#E8FBF7",
+        copyColor: "#00332E",
+        cancelText: "Dismiss",
+        confirmText: "Explore Testimonials",
+      };
+    default:
+      // empty until we’ve fetched
+      return {};
+  }
+};
+
+export function Modal(props: ModalProps) {
+  const { onClose, onConfirm, ...overrides } = props;
+  const router = useRouter();
+  // if user didn't supply onConfirm, navigate to /testimonials
+  const handleConfirm = onConfirm ?? (() => router.push("/testimonials"));
+
+  // start empty
+  const [modalData, setModalData] = React.useState<ContentProps>(() => getModalData());
+
+  React.useEffect(() => {
+    mixpanel.flags.get_feature_data(experimentId).then((variant) => {
+      console.log("[MIXPANEL]: GOT FLAG", variant);
+      setModalData(getModalData(variant));
+    });
+  }, []);
+
+  // have we loaded anything yet?
+  const isLoaded = Object.keys(modalData).length > 1;
+
+  // props override flag data
+  const { headline, tagline, copy, color, bgColor, copyColor, cancelText, confirmText, imgUrl } = {
+    ...modalData,
+    ...overrides,
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      style={{
+        opacity: isLoaded ? 1 : 0,
+        transition: "opacity 2s ease-in-out",
+      }}
+    >
       {/* backdrop */}
       <div className="absolute inset-0 bg-black opacity-50" onClick={onClose} />
 
-      {/* modal panel */}
+      {/* panel: always in the DOM, but opacity goes 0→1 when loaded */}
       <div
         className="rounded-lg shadow-xl z-10 w-11/12 max-w-md p-6"
         style={{
@@ -56,20 +128,22 @@ export const Modal: React.FC<ModalProps> = ({
           color: copyColor,
         }}
       >
-        <h2 className="text-2xl font-bold mb-2">{headline}</h2>
-        <h3 className="text-lg font-semibold mb-4">{tagline}</h3>
-
-        {imgUrl && <img src={imgUrl} alt="" className="mb-4 w-full max-h-24 max-w-20 object-cover rounded mx-auto" />}
-
-        <p className="text-base mb-6">{copy}</p>
-
-        <div className="flex justify-end space-x-3">
-          <Button variant="outline" onClick={onClose}>
-            {cancelText}
-          </Button>
-          <Button onClick={onConfirm}>{confirmText}</Button>
-        </div>
+        {/* only show children once we have data */}
+        {isLoaded && (
+          <div>
+            <h2 className="text-2xl font-bold mb-2">{headline}</h2>
+            {tagline && <h3 className="text-lg font-semibold mb-4">{tagline}</h3>}
+            {imgUrl && <img src={imgUrl} alt="" className="mb-4 w-auto max-h-24 object-cover rounded mx-auto" />}
+            {copy && <p className="text-base mb-6">{copy}</p>}
+            <div className="flex justify-end space-x-3">
+              <Button variant="outline" onClick={onClose}>
+                {cancelText}
+              </Button>
+              <Button onClick={handleConfirm}>{confirmText}</Button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
-};
+}
