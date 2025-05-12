@@ -152,27 +152,41 @@ Since the site is prebuilt as a static shell, page loads are near-instant.
 
 This is the typical flow of data from a client application to Mixpanel's APIs, database, and analytical reports:
 
+<div style="text-align: center;">	
+
 ```mermaid
 flowchart LR
-  B[Client App]
-  B -->|triggers events| C[MP API] -->|ingests| D[MP Db]
-  
-  E -->|queries| D[MP Db]
-  D -->|insights| E[MP Reports]
+
+    subgraph " Normal Mixpanel "
+        B[Client App]
+        B -->|triggers events| C[MP API]
+        C -->|ingests| D[MP Db]
+        D -->|insights| E[MP Reports]
+        E -->|queries| D
+    end
 ```
+</div>
 
 Feature-flagging significantly extends this pattern by allowing Mixpanel to supply bespoke configuration data back to the client app. Configuration data is used to control the behavior of the client app, (such as which features are enabled or disabled for a given user), and also is pushed back into Mixpanel for analysis in all core reports as well as a (new!) experiments report:
 
+<div style="text-align: center;">	
+
 ```mermaid
 flowchart LR
-  A[Client App] -->|triggers events| B[MP API]
-  B -->|fetches flags| C[MP Flags]
-  B -->|ingests| D[MP Db]
-  E -->|queries| D[MP Db]
-  D -->|insights| E[MP Reports]
-  C --> |experiment data| D
-  C -->|returns config| A
-  E <--> F[MP Experiments]
-  C -->|analysis| F[MP Experiments] 
+    
+    subgraph " Mixpanel w/Flagging "
+        A[Client App]
+        A -->|triggers events| G[MP API]
+        G -->|fetches flags| H[MP Flags]
+        G -->|ingests| I[MP Db]
+        J[MP Reports] -->|queries| I
+        I -->|insights| J
+        H -->|experiment data| I
+        H -->|returns config| A
+        J <-->|analysis| K[MP Experiments]
+    end
+    
 ```
+</div>
+
 [docs](https://www.notion.so/mxpnl/Feature-Flagging-Beta-Documentation-1e0e0ba925628046a590ff15a351e74b?pvs=26&qid=)
