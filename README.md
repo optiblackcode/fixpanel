@@ -141,3 +141,38 @@ Since the site is prebuilt as a static shell, page loads are near-instant.
 - **Add new flags**: Define new experiments in Mixpanel and fetch via `mixpanel.flags.get_feature_data()`.
 - **Track new events**: Use `mixpanel.track('Event Name', { property: 'value' });` anywhere in the code.
 - **Add pages**: Create new files under `/app` to expand navigation.
+
+
+---
+
+
+## Feature Flagging Architecture
+
+
+
+This is the typical flow of data from a client application to Mixpanel's APIs, database, and analytical reports:
+
+```mermaid
+flowchart LR
+  B[Client App]
+  B -->|triggers events| C[MP API] -->|ingests| D[MP Db]
+  
+  E -->|queries| D[MP Db]
+  D -->|insights| E[MP Reports]
+```
+
+Feature-flagging significantly extends this pattern by allowing Mixpanel to supply bespoke configuration data back to the client app. Configuration data is used to control the behavior of the client app, (such as which features are enabled or disabled for a given user), and also is pushed back into Mixpanel for analysis in all core reports as well as a (new!) experiments report:
+
+```mermaid
+flowchart LR
+  A[Client App] -->|triggers events| B[MP API]
+  B -->|fetches flags| C[MP Flags]
+  B -->|ingests| D[MP Db]
+  E -->|queries| D[MP Db]
+  D -->|insights| E[MP Reports]
+  C --> |experiment data| D
+  C -->|returns config| A
+  E <--> F[MP Experiments]
+  C -->|analysis| F[MP Experiments] 
+```
+[docs](https://www.notion.so/mxpnl/Feature-Flagging-Beta-Documentation-1e0e0ba925628046a590ff15a351e74b?pvs=26&qid=)
