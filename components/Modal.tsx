@@ -93,9 +93,10 @@ export function Modal(props: ModalProps) {
   const [modalData, setModalData] = React.useState<ContentProps>(() => getModalData());
 
   React.useEffect(() => {
-    mixpanel.flags.get_feature_data(experimentId).then((variant) => {
-      console.log("[MIXPANEL]: GOT FLAG", variant);
-      setModalData(getModalData(variant));
+    mixpanel.flags.get_feature_data(experimentId) // ! look for a feature flag for the experiment + user
+		.then((variant) => {
+      		console.log("[MIXPANEL]: GOT FLAG", variant); 
+      		setModalData(getModalData(variant)); // ! use the variant to the app
     });
   }, []);
 

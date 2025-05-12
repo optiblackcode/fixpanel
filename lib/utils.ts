@@ -28,10 +28,8 @@ export function initMixpanel(): Promise<typeof mixpanel> {
       return;
     }
 
-    mixpanel.init(MIXPANEL_TOKEN, {
-      // flags
-      //@ts-ignore
-      flags: {},
+    mixpanel.init(MIXPANEL_TOKEN, {      
+      flags: {}, // ! turn on Mixpanel's feature flags
 
       // autocapture
       autocapture: {
