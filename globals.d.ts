@@ -1,5 +1,3 @@
-declare var RESET: () => void;
-
 declare var mixpanel: any;
 
 import 'mixpanel-browser';
@@ -15,7 +13,15 @@ declare module 'mixpanel-browser' {
 }
 
 declare global {
-	interface Window {
-	  RESET: () => void;
-	}
+  interface Window {
+    /**
+     * Our debug helper installed by initMixpanel()
+     */
+    RESET: () => void;
+
+    /**
+     * Exposed Mixpanel instance
+     */
+    mixpanel: any;
   }
+}

@@ -12,18 +12,28 @@ const MIXPANEL_PROXY = `https://express-proxy-lmozz6xkha-uc.a.run.app`;
 // Singleton promise to ensure we only init once and know when mixpanel is ready
 let mixpanelReady: Promise<typeof mixpanel> | null = null;
 
-const PARAMS = qsToObj(window.location.search);
-const { user = "" } = PARAMS;
-
+// parse a query-string safely
 function qsToObj(queryString: string) {
   try {
-    const parsedQs = new URLSearchParams(queryString);
-    const params = Object.fromEntries(parsedQs);
-    return params;
-  } catch (e) {
+    return Object.fromEntries(new URLSearchParams(queryString));
+  } catch {
     return {};
   }
 }
+
+/**
+ * Only read window.location.search at runtime in the browser.
+ */
+function getParams() {
+  if (typeof window === "undefined") {
+    return {};
+  }
+  return qsToObj(window.location.search);
+}
+
+// now *inside* your initMixpanel (or wherever) you do:
+const PARAMS = getParams();
+const { user = "" } = PARAMS;
 
 /**
  * Initialize Mixpanel and return a promise that resolves when loaded.
