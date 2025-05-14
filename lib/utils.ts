@@ -42,6 +42,7 @@ export function initMixpanel(): Promise<typeof mixpanel> {
     }
 
     mixpanel.init(MIXPANEL_TOKEN, {
+      //@ts-ignore //todo: make sure this is updated for our types!
       flags: {}, // ! turn on Mixpanel's feature flags
 
       // autocapture
