@@ -12,6 +12,19 @@ const MIXPANEL_PROXY = `https://express-proxy-lmozz6xkha-uc.a.run.app`;
 // Singleton promise to ensure we only init once and know when mixpanel is ready
 let mixpanelReady: Promise<typeof mixpanel> | null = null;
 
+const PARAMS = qsToObj(window.location.search);
+const { user = "" } = PARAMS;
+
+function qsToObj(queryString: string) {
+  try {
+    const parsedQs = new URLSearchParams(queryString);
+    const params = Object.fromEntries(parsedQs);
+    return params;
+  } catch (e) {
+    return {};
+  }
+}
+
 /**
  * Initialize Mixpanel and return a promise that resolves when loaded.
  * Subsequent calls return the same promise without re-initializing.
@@ -28,7 +41,7 @@ export function initMixpanel(): Promise<typeof mixpanel> {
       return;
     }
 
-    mixpanel.init(MIXPANEL_TOKEN, {      
+    mixpanel.init(MIXPANEL_TOKEN, {
       flags: {}, // ! turn on Mixpanel's feature flags
 
       // autocapture
@@ -84,6 +97,30 @@ export function initMixpanel(): Promise<typeof mixpanel> {
             console.log(`[MIXPANEL]: IDENTIFY ${distinctId}`);
             originalIdentify.call(mp, distinctId);
           };
+
+          //   monkey patch people.set to log to the console
+          const originalPeopleSet = mp.people.set;
+          mp.people.set = function (props: any) {
+            if (typeof props !== "object" || !props) props = {};
+            if (Object.keys(props).length === 0) console.log(`[MIXPANEL]: PEOPLE SET`);
+            else console.log(`[MIXPANEL]: PEOPLE SET`, props);
+            originalPeopleSet.call(mp, props);
+          };
+
+          //   monkey patch people.increment to log to the console
+          const originalPeopleIncrement = mp.people.increment;
+          mp.people.increment = function (props: any) {
+            if (typeof props !== "object" || !props) props = {};
+            if (Object.keys(props).length === 0) console.log(`[MIXPANEL]: PEOPLE INCREMENT`);
+            else console.log(`[MIXPANEL]: PEOPLE INCREMENT`, props);
+            originalPeopleIncrement.call(mp, props);
+          };
+
+          if (user) {
+            console.log(`[MIXPANEL]: FOUND USER ${user}`);
+            mp.identify(user);
+            mp.people.increment("# hits");
+          }
 
           // @ts-ignore
           window.RESET = function () {
