@@ -12,7 +12,8 @@
 		"start": "next start",
 		"lint": "next lint",
 		"headless": "node ./scripts/headless.js",
-		"sanity": "npx serve ./dev/"
+		"sanity": "npx serve ./dev/",
+		"metube": "npx serve ./metube/"
 	},
 	"dependencies": {
 		"@google-cloud/storage": "^7.12.1",
