@@ -93,11 +93,14 @@ export function Modal(props: ModalProps) {
   const [modalData, setModalData] = React.useState<ContentProps>(() => getModalData());
 
   React.useEffect(() => {
-    mixpanel.flags.get_feature_data(experimentId) // ! look for a feature flag for the experiment + user
-		.then((variant) => {
-      		console.log("[MIXPANEL]: GOT FLAG", variant); 
-      		setModalData(getModalData(variant)); // ! use the variant to the app
-    });
+    mixpanel.flags
+      .get_variant_value(experimentId) // ! look for a feature flag for the experiment + user
+      .then((returnedVariant: unknown) => {
+        let variant = returnedVariant as Variant;
+        if (!variant || typeof variant !== "string") variant = "no story (D)";
+        console.log("[MIXPANEL]: GOT FLAG", variant);
+        if (variant) setModalData(getModalData(variant)); // ! use the variant to the app
+      });
   }, []);
 
   // have we loaded anything yet?
