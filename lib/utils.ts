@@ -64,9 +64,10 @@ export function initMixpanel(): Promise<typeof mixpanel> {
         submit: true,
         capture_text_content: true,
       },
+      record_heatmap_data: true,
 
       // session replay
-      record_sessions_percent: 0,
+      //   record_sessions_percent: 100, //instead we start() and stop() manually
       record_inline_images: true,
       record_collect_fonts: true,
       record_mask_text_selector: "nope",
