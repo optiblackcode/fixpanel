@@ -8,7 +8,7 @@
 	"author": "ak--47",
 	"scripts": {
 		"dev": "next dev",
-		"build": "next build",
+		"build": "next build && cp -r ./metube ./out/metube",
 		"start": "next start",
 		"lint": "next lint",
 		"headless": "node ./scripts/headless.js",
