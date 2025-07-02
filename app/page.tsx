@@ -114,6 +114,7 @@ export default function HomePage() {
                   size="lg"
                   variant="outline"
                   className="bg-white text-[#CC332B] hover:bg-white/20"
+				  id="customerStories"
                   onClick={() => {
                     setIsModalOpen(true);
                   }}
