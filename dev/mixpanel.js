@@ -1,5 +1,3 @@
-
-
 mixpanel.init(MIXPANEL_TOKEN, {
 	debug: true,
 	ignore_dnt: true,

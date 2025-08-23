@@ -58,6 +58,70 @@
 			display: inline-block;
 			border: 1px solid #000;
 		}
+
+		body {
+			font-family: sans-serif;
+			color: #333;
+			background-color: #fdfdfd;
+			max-width: 900px;
+			margin: 2rem auto;
+			padding: 0 1rem;
+		}
+
+		h1,
+		h2,
+		h3 {
+			border-bottom: 1px solid #eaeaea;
+			padding-bottom: 0.5rem;
+		}
+
+		fieldset {
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			margin-bottom: 1rem;
+			padding: 1rem;
+		}
+
+		legend {
+			font-weight: bold;
+		}
+
+		code {
+			background-color: #eee;
+			padding: 2px 4px;
+			border-radius: 3px;
+		}
+
+		pre {
+			background-color: #eee;
+			padding: 1rem;
+			border-radius: 4px;
+			white-space: pre-wrap;
+		}
+
+		table,
+		th,
+		td {
+			border: 1px solid #ccc;
+			border-collapse: collapse;
+		}
+
+		th,
+		td {
+			padding: 0.5rem;
+			text-align: left;
+		}
+
+		kbd {
+			background-color: #333;
+			color: #fff;
+			padding: 2px 5px;
+			border-radius: 3px;
+		}
+
+		hr {
+			margin: 2rem 0;
+		}
 	</style>
 	<meta charset="utf-8">
 	<meta name="viewport"
@@ -73,6 +137,604 @@
 </head>
 
 <body>
+
+	<header>
+		<h1>HTML Element Showcase 🧪</h1>
+		<nav>
+			<h2>Site Navigation</h2>
+			<ul>
+				<li><a href="#text">Text Content</a></li>
+				<li><a href="#forms">Forms</a></li>
+				<li><a href="#media">Media</a></li>
+				<li><a href="#tables">Tables</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<hr>
+
+	<main>
+		<article id="intro"
+			lang="en-US">
+			<h2>Introduction</h2>
+			<p>This page is a comprehensive demonstration of every HTML element supported by modern web browsers. It
+				serves as a visual reference and testbed.</p>
+		</article>
+
+		<hr>
+
+		<section id="text">
+			<h2>Content Sectioning & Text</h2>
+
+			<h1>Heading 1</h1>
+			<h2>Heading 2</h2>
+			<h3>Heading 3</h3>
+			<h4>Heading 4</h4>
+			<h5>Heading 5</h5>
+			<h6>Heading 6</h6>
+
+			<p>This is a standard paragraph <code>&lt;p&gt;</code>. It can contain various inline elements. For
+				instance, you can have <strong>&lt;strong&gt; (important)</strong> text, <em>&lt;em&gt;
+					(emphasized)</em> text, <b>&lt;b&gt; (bolded, no extra importance)</b> text, or <i>&lt;i&gt;
+					(italicized, alternate voice)</i> text. Use <u>&lt;u&gt; (unarticulated annotation)</u> for things
+				like spelling errors, or <s>&lt;s&gt; (strikethrough)</s> for inaccurate content. <small>&lt;small&gt;
+					text is for side comments.</small></p>
+
+			<blockquote>
+				<p>This is a blockquote, often used for long citations.</p>
+				<cite>— A knowledgeable source</cite>
+			</blockquote>
+
+			<p>A short inline quotation uses the <q>q element</q>.</p>
+
+			<p>The <dfn>HTML</dfn> element (HyperText Markup Language) is the standard markup language for creating web
+				pages. The <code>&lt;dfn&gt;</code> tag is used to indicate the defining instance of a term.</p>
+
+			<p>You can use the <abbr title="HyperText Markup Language">HTML</abbr> tag. The <code>&lt;abbr&gt;</code>
+				tag is for abbreviations.</p>
+
+			<address>
+				Written by A.I.<br>
+				Visit us at: example.com<br>
+				Duxbury, VT
+			</address>
+
+			<pre>
+    This text preserves spaces
+    and line breaks. It's ideal
+    for displaying code blocks.
+            </pre>
+
+			<h3>Lists</h3>
+			<h4>Unordered List <code>&lt;ul&gt;</code></h4>
+			<ul>
+				<li>List item 1</li>
+				<li>List item 2</li>
+			</ul>
+
+			<h4>Ordered List <code>&lt;ol&gt;</code></h4>
+			<ol>
+				<li>First item</li>
+				<li>Second item</li>
+			</ol>
+
+			<h4>Menu List <code>&lt;menu&gt;</code></h4>
+			<menu>
+				<li>Menu Item A</li>
+				<li>Menu Item B</li>
+			</menu>
+
+			<h4>Description List <code>&lt;dl&gt;</code></h4>
+			<dl>
+				<dt>Term 1</dt>
+				<dd>Description for Term 1.</dd>
+				<dt>Term 2</dt>
+				<dd>Description for Term 2.</dd>
+			</dl>
+
+			<h3>Other Text Elements</h3>
+			<p>Use <mark>mark</mark> to highlight text. Code can be represented with <code>&lt;code&gt;</code>. Keyboard
+				input with <kbd>Ctrl</kbd> + <kbd>S</kbd>. Sample output with <samp>File not found.</samp> And variables
+				with <var>x</var> = <var>y</var> + 2.</p>
+
+			<p>H<sub>2</sub>O (using <code>&lt;sub&gt;</code>) and E=MC<sup>2</sup> (using <code>&lt;sup&gt;</code>).
+			</p>
+
+			<p>The current date is <time datetime="2025-07-18">July 18th, 2025</time>.</p>
+
+			<p>This word is spelled <bdi>עִבְרִית</bdi> correctly. The <code>&lt;bdi&gt;</code> tag isolates text that
+				might be formatted in a different direction. Contrast with <bdo dir="rtl">this text</bdo> which forces
+				right-to-left direction.</p>
+
+			<p>The <data value="21053">tomato</data> element links content with a machine-readable translation.</p>
+
+			<p>This line includes a <br> line break.</p>
+			<p>This line includes a potential line break opportunity here:<wbr>supercalifragilisticexpialidocious.</p>
+
+			<ruby>
+				漢 <rp>(</rp>
+				<rt>Kan</rt>
+				<rp>)</rp>
+				字 <rp>(</rp>
+				<rt>ji</rt>
+				<rp>)</rp>
+			</ruby>
+
+			<div>A generic <code>&lt;div&gt;</code> container, often used for styling purposes with a <span
+					style="color: blue;">generic &lt;span&gt; inside</span>.</div>
+
+			<hr>
+		</section>
+
+		<hr>
+
+		<section id="forms">
+			<h2>Forms</h2>
+			<form action="#"
+				method="get"
+				id="mainForm">
+				<fieldset name="personal_info">
+					<legend>Personal Information</legend>
+
+					<div>
+						<label for="name_input">Name:</label>
+						<input type="text"
+							id="name_input"
+							name="name"
+							placeholder="John Doe"
+							required>
+					</div>
+
+					<div>
+						<label for="password_input">Password:</label>
+						<input type="password"
+							id="password_input"
+							name="password"
+							required>
+					</div>
+
+					<div>
+						<label for="email_input">Email:</label>
+						<input type="email"
+							id="email_input"
+							name="email">
+					</div>
+
+					<div>
+						<label for="tel_input">Telephone:</label>
+						<input type="tel"
+							id="tel_input"
+							name="phone">
+					</div>
+
+					<div>
+						<label for="url_input">Website:</label>
+						<input type="url"
+							id="url_input"
+							name="website">
+					</div>
+
+					<div>
+						<label for="search_input">Search:</label>
+						<input type="search"
+							id="search_input"
+							name="search">
+					</div>
+				</fieldset>
+
+				<fieldset name="choices">
+					<legend>Choices</legend>
+
+					<div>
+						<label for="fav_pet">Favorite Pet:</label>
+						<input list="pets"
+							id="fav_pet"
+							name="fav_pet">
+						<datalist id="pets">
+							<option value="Dog"></option>
+							<option value="Cat"></option>
+							<option value="Parrot"></option>
+						</datalist>
+					</div>
+
+					<div>
+						<p>Select an option:</p>
+						<input type="radio"
+							id="radio1"
+							name="radio_group"
+							value="1">
+						<label for="radio1">Option 1</label>
+						<input type="radio"
+							id="radio2"
+							name="radio_group"
+							value="2"
+							checked>
+						<label for="radio2">Option 2</label>
+					</div>
+
+					<div>
+						<p>Check all that apply:</p>
+						<input type="checkbox"
+							id="check1"
+							name="check1"
+							value="Bike">
+						<label for="check1">I have a bike</label>
+						<input type="checkbox"
+							id="check2"
+							name="check2"
+							value="Car"
+							checked>
+						<label for="check2">I have a car</label>
+					</div>
+
+					<div>
+						<label for="car_select">Choose a car:</label>
+						<select id="car_select"
+							name="cars">
+							<optgroup label="Swedish Cars">
+								<option value="volvo">Volvo</option>
+								<option value="saab">Saab</option>
+							</optgroup>
+							<optgroup label="German Cars">
+								<option value="mercedes">Mercedes</option>
+								<option value="audi"
+									selected>Audi</option>
+							</optgroup>
+						</select>
+					</div>
+				</fieldset>
+
+				<fieldset name="inputs_and_ranges">
+					<legend>Advanced Inputs & Ranges</legend>
+
+					<div>
+						<label for="color_picker">Color Picker:</label>
+						<input type="color"
+							id="color_picker"
+							name="favcolor"
+							value="#ff0000">
+					</div>
+
+					<div>
+						<label for="date_input">Date:</label>
+						<input type="date"
+							id="date_input"
+							name="trip-start">
+					</div>
+
+					<div>
+						<label for="datetime_input">Date & Time:</label>
+						<input type="datetime-local"
+							id="datetime_input"
+							name="meeting-time">
+					</div>
+
+					<div>
+						<label for="month_input">Month:</label>
+						<input type="month"
+							id="month_input"
+							name="start-month">
+					</div>
+
+					<div>
+						<label for="week_input">Week:</label>
+						<input type="week"
+							id="week_input"
+							name="start-week">
+					</div>
+
+					<div>
+						<label for="time_input">Time:</label>
+						<input type="time"
+							id="time_input"
+							name="appt-time">
+					</div>
+
+					<div>
+						<label for="number_input">Number (1-10):</label>
+						<input type="number"
+							id="number_input"
+							name="quantity"
+							min="1"
+							max="10">
+					</div>
+
+					<div>
+						<label for="range_input">Range:</label>
+						<input type="range"
+							id="range_input"
+							name="volume"
+							min="0"
+							max="100">
+					</div>
+
+					<div>
+						<label for="file_input">File Upload:</label>
+						<input type="file"
+							id="file_input"
+							name="myFile"
+							accept="image/png, image/jpeg">
+					</div>
+
+					<label for="story">Tell us your story:</label>
+					<textarea id="story"
+						name="story"
+						rows="5"
+						cols="33">It was a dark and stormy night...</textarea>
+				</fieldset>
+
+				<fieldset>
+					<legend>Meters and Progress</legend>
+					<label for="disk_c">Disk C usage:</label>
+					<meter id="disk_c"
+						value="2"
+						min="0"
+						max="10">2 out of 10</meter><br>
+					<label for="disk_d">Disk D usage:</label>
+					<meter id="disk_d"
+						value="0.6">60%</meter><br>
+					<label for="file_progress">File progress:</label>
+					<progress id="file_progress"
+						value="70"
+						max="100">70%</progress>
+				</fieldset>
+
+				<fieldset>
+					<legend>Form Output</legend>
+					<p>The sum is: <output name="result"
+							for="a b">30</output></p>
+					<input type="hidden"
+						name="hidden_field"
+						value="secret">
+				</fieldset>
+
+				<input type="hidden"
+					name="user_id"
+					value="12345">
+				<button type="submit">Submit with &lt;button&gt;</button>
+				<button type="reset">Reset</button>
+				<input type="submit"
+					value="Submit with &lt;input&gt;">
+				<input type="button"
+					value="A generic input button">
+				<input type="image"
+					src="https://via.placeholder.com/80x30.png?text=Submit"
+					alt="Submit button"
+					width="80"
+					height="30">
+			</form>
+		</section>
+
+		<hr>
+
+		<section id="media">
+			<h2>Image and Multimedia</h2>
+
+			<h3>Images</h3>
+			<figure>
+				<img src="https://via.placeholder.com/400x150.png?text=Standard+IMG+Tag"
+					alt="A placeholder image"
+					usemap="#image-map">
+				<figcaption>A <code>&lt;figcaption&gt;</code> for the image above.</figcaption>
+			</figure>
+
+			<map name="image-map">
+				<area shape="rect"
+					coords="0,0,200,150"
+					href="https://example.com/left_half"
+					alt="Left Half">
+				<area shape="rect"
+					coords="201,0,400,150"
+					href="https://example.com/right_half"
+					alt="Right Half">
+			</map>
+
+			<h3>Picture Element</h3>
+			<picture>
+				<source srcset="https://via.placeholder.com/600x200.png?text=Large+Screen"
+					media="(min-width: 600px)">
+				<source srcset="https://via.placeholder.com/300x100.png?text=Small+Screen"
+					media="(min-width: 300px)">
+				<img src="https://via.placeholder.com/150x50.png?text=Default"
+					alt="A responsive image">
+			</picture>
+
+			<h3>Audio</h3>
+			<!-- <audio controls>
+				<source src="horse.ogg"
+					type="audio/ogg">
+				<source src="horse.mp3"
+					type="audio/mpeg">
+				Your browser does not support the audio element.
+			</audio> -->
+
+			<h3>Video</h3>
+			<!-- <video width="320"
+				height="240"
+				controls
+				poster="https://via.placeholder.com/320x240.png?text=Video+Poster">
+				<source src="movie.mp4"
+					type="video/mp4">
+				<source src="movie.ogg"
+					type="video/ogg">
+				<track kind="captions"
+					src="captions_en.vtt"
+					srclang="en"
+					label="English">
+				Your browser does not support the video tag.
+			</video> -->
+
+			<h3>Embedded Content</h3>
+			<iframe width="420"
+				height="315"
+				src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+				title="Demo Video"></iframe>
+
+			<!-- <embed type="image/svg+xml"
+				src="https://www.w3.org/Graphics/SVG/1.1/images/color-gradient-2T.svg"
+				width="200"
+				height="100">
+
+			<object data="https://www.w3.org/Graphics/SVG/1.1/images/color-circle-2T.svg"
+				width="200"
+				height="100"></object> -->
+		</section>
+
+		<hr>
+
+		<section>
+			<h2>SVG and MathML</h2>
+			<h3>Embedded SVG</h3>
+			<svg width="100"
+				height="100">
+				<circle cx="50"
+					cy="50"
+					r="40"
+					stroke="green"
+					stroke-width="4"
+					fill="yellow" />
+			</svg>
+
+			<h3>Embedded MathML</h3>
+			<p>The quadratic formula is:</p>
+			<math>
+				<mi>x</mi>
+				<mo>=</mo>
+				<mfrac>
+					<mrow>
+						<mo form="prefix">−</mo>
+						<mi>b</mi>
+						<mo>±</mo>
+						<msqrt>
+							<msup>
+								<mi>b</mi>
+								<mn>2</mn>
+							</msup>
+							<mo>−</mo>
+							<mn>4</mn>
+							<mi>a</mi>
+							<mi>c</mi>
+						</msqrt>
+					</mrow>
+					<mrow>
+						<mn>2</mn>
+						<mi>a</mi>
+					</mrow>
+				</mfrac>
+			</math>
+		</section>
+
+		<hr>
+
+		<section id="tables">
+			<h2>Table Content</h2>
+			<table>
+				<caption>Monthly Savings</caption>
+				<colgroup>
+					<col span="2"
+						style="background-color: #f2f2f2;">
+					<col style="background-color: #e8f4ff;">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>Month</th>
+						<th>Savings</th>
+						<th>Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>January</td>
+						<td>$100</td>
+						<td rowspan="2">Good start</td>
+					</tr>
+					<tr>
+						<td>February</td>
+						<td>$80</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="2">Total Savings</td>
+						<td>$180</td>
+					</tr>
+				</tfoot>
+			</table>
+		</section>
+
+		<hr>
+
+		<section>
+			<h2>Interactive Elements & Web Components</h2>
+
+			<h3>Details & Summary</h3>
+			<details>
+				<summary>Click to see details</summary>
+				<p>Here is some hidden information that is now revealed. The <code>&lt;details&gt;</code> and
+					<code>&lt;summary&gt;</code> elements create a disclosure widget.</p>
+			</details>
+
+			<h3>Dialog</h3>
+			<dialog id="myDialog">
+				<p>This is a dialog window.</p>
+				<form method="dialog">
+					<button>OK</button>
+				</form>
+			</dialog>
+			<button onclick="document.getElementById('myDialog').showModal()">Show Dialog</button>
+
+			<h3>Canvas</h3>
+			<canvas id="myCanvas"
+				width="200"
+				height="100"
+				style="border:1px solid #000000;"></canvas>
+
+			<h3>Template & Slot (Web Components)</h3>
+			<p>The content below is not visible on the page, but can be used by JavaScript to instantiate new elements.
+			</p>
+			<template id="myTemplate">
+				<article>
+					<h4>
+						<slot name="card-title">Default Title</slot>
+					</h4>
+					<p>
+						<slot name="card-content">Default content...</slot>
+					</p>
+				</article>
+			</template>
+		</section>
+
+		<hr>
+
+		<aside>
+			<h3>Aside</h3>
+			<p>This is an aside section, which might contain related links, ads, or author bios.</p>
+		</aside>
+
+	</main>
+
+	<hr>
+
+	<footer>
+		<p>&copy; 2025 AI Assistant. All rights reserved.</p>
+		<p><ins>This text was inserted.</ins> <del>This text was deleted.</del></p>
+	</footer>
+
+	<script>
+		// Draw on the canvas
+		const canvas = document.getElementById('myCanvas');
+		if (canvas.getContext) {
+			const ctx = canvas.getContext('2d');
+			ctx.fillStyle = 'rgb(200, 0, 0)';
+			ctx.fillRect(10, 10, 50, 50);
+			ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
+			ctx.fillRect(30, 30, 50, 50);
+		}
+
+		// This script would typically handle more complex interactions, form validation,
+		// or manipulation of the DOM, including using the <template> element.
+	</script>
+
 	<h1 id="theHeading">HTML Elements Collection</h1>
 
 	<section>
@@ -341,6 +1003,7 @@
 	</section>
 
 	<script src="mixpanel.js"></script>
+	<script src="ht-digital.js"></script>
 </body>
 
 </html>

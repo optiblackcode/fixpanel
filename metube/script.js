@@ -159,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
 //MIXPANEL
 // CUSTOMIZE THESE:
 var MIXPANEL_TOKEN = `32fd7149e2ac0cc030bda4c4b839b813`; // you MUST set this to your project token: https://bit.ly/42HC8I8
@@ -181,6 +182,49 @@ var MIXPANEL_USER_ID = async () => {
 var MIXPANEL_CUSTOM_LIB_URL = `${MIXPANEL_PROXY}/lib.min.js`;
 (function (f, b) { if (!b.__SV) { var e, g, i, h; window.mixpanel = b; b._i = []; b.init = function (e, f, c) { function g(a, d) { var b = d.split("."); 2 == b.length && ((a = a[b[0]]), (d = b[1])); a[d] = function () { a.push([d].concat(Array.prototype.slice.call(arguments, 0))); }; } var a = b; "undefined" !== typeof c ? (a = b[c] = []) : (c = "mixpanel"); a.people = a.people || []; a.toString = function (a) { var d = "mixpanel"; "mixpanel" !== c && (d += "." + c); a || (d += " (stub)"); return d; }; a.people.toString = function () { return a.toString(1) + ".people (stub)"; }; i = "disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove".split(" "); for (h = 0; h < i.length; h++) g(a, i[h]); var j = "set set_once union unset remove delete".split(" "); a.get_group = function () { function b(c) { d[c] = function () { call2_args = arguments; call2 = [c].concat(Array.prototype.slice.call(call2_args, 0)); a.push([e, call2]); }; } for (var d = {}, e = ["get_group"].concat(Array.prototype.slice.call(arguments, 0)), c = 0; c < j.length; c++) b(j[c]); return d; }; b._i.push([e, f, c]); }; b.__SV = 1.2; e = f.createElement("script"); e.type = "text/javascript"; e.async = !0; e.src = "undefined" !== typeof MIXPANEL_CUSTOM_LIB_URL ? MIXPANEL_CUSTOM_LIB_URL : "file:" === f.location.protocol && "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//) ? "https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js" : "//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js"; g = f.getElementsByTagName("script")[0]; g.parentNode.insertBefore(e, g); } })(document, window.mixpanel || []);
 
+// build a function that returns foo, bar, baz, or qux 25% of the time each
+function getRandomChoice() {
+    const choices = [
+        'foo', 'bar', 'baz', 'qux',
+        'alpha', 'beta', 'gamma', 'delta',
+        'omega', 'sigma', 'lambda', 'zeta',
+        'pixel', 'quantum', 'neutron'
+    ];
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    return choices[randomIndex];
+}
+
+function MONKEY_PATCH_REGISTER() {
+	// Store the original register method before overriding it
+	const originalRegister = mixpanel.register;
+
+	// Override the register method with our enhanced version
+	mixpanel.register = function (properties, options) {
+		if (!properties || typeof properties !== 'object') {
+			return originalRegister.call(this, properties, options);
+		}
+
+		const transformedProperties = {};
+
+		for (const [key, value] of Object.entries(properties)) {
+			if (typeof value === 'function') {
+				try {
+					// Call the function to get the primitive value
+					const result = value();
+					transformedProperties[key] = result;					
+				} catch (error) {
+					// Handle function execution errors gracefully
+					console.warn(`Function for property '${key}' threw an error:`, error);
+					transformedProperties[key] = value?.toString();
+				}
+			} else {
+				// Keep non-function values as-is
+				transformedProperties[key] = value;
+			}
+		}
+		return originalRegister.call(this, transformedProperties, options);
+	};
+}
 
 // Actual initialization with async support
 async function initMixpanel() {
@@ -218,6 +262,7 @@ async function initMixpanel() {
 
 		// id management
 		loaded: function (mixpanel) {
+			MONKEY_PATCH_REGISTER();
 			if (MIXPANEL_DEBUG) console.log("[MIXPANEL] library loaded successfully.");
 			if (userId) {
 				mixpanel.identify(userId);
@@ -240,18 +285,23 @@ async function initMixpanel() {
 					}, 500);
 				}, 500);
 			};
+
+			mixpanel.register({
+				this_is_the_word: getRandomChoice,
+				hello: "World"
+			}); // Register the function that returns a random word
+
 		}
 	});
-
 }
 
 function getBasePath() {
-  // Handles custom base path (like "/metube" on Neocities)
-  const pathname = window.location.pathname;
-  if (pathname.startsWith("/metube")) {
-    return "/metube";
-  }
-  return "/";
+	// Handles custom base path (like "/metube" on Neocities)
+	const pathname = window.location.pathname;
+	if (pathname.startsWith("/metube")) {
+		return "/metube";
+	}
+	return "/";
 }
 // Internal utility to safely handle sync OR async functions
 async function safelyResolveUserId(fn) {
@@ -268,3 +318,5 @@ async function safelyResolveUserId(fn) {
 // DOMContentLoaded handling
 if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", initMixpanel);
 else initMixpanel();
+
+
