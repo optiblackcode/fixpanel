@@ -25,12 +25,15 @@ export interface ModalProps extends Partial<ContentProps> {
   onConfirm?: () => void;
 }
 
-const experimentId = "exp_customerStory"; //? https://bit.ly/43siFeM (Mixpanel Flag Key!)
-type Variant = "no story (D)" | "sarah story (A)" | "marco portfolio (B)" | "priya debt (C)"; // ? mixpanel flag values
+// const experimentId = "exp_customerStory"; //? https://bit.ly/43siFeM (Mixpanel Flag Key!)
+const experimentId = "new_feature_flag_optiblack"; //? https://bit.ly/43siFeM (Mixpanel Flag Key!)
+type Variant = "no story (D)" | "control" | "marco portfolio (B)" | "priya debt (C)"; // ? mixpanel flag values
+
+
 
 const getModalData = (v?: Variant): ContentProps => {
   switch (v) {
-    case "sarah story (A)":
+    case "control":
       return {
         headline: "“FixPanel Supercharged My Savings!”",
         tagline: "— Sarah L., Small Business Owner [Variant A]",
